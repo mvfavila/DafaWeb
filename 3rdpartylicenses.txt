@@ -350,8 +350,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
+@angular/forms
+MIT
+
 @angular/animations
 MIT
+
+@angular/material/core
+
+@angular/material/list
 
 @angular/material/button
 
@@ -360,13 +367,6 @@ MIT
 @angular/material/sidenav
 
 @angular/material/toolbar
-
-@angular/forms
-MIT
-
-@angular/material/core
-
-@angular/material/list
 
 zone.js
 MIT
