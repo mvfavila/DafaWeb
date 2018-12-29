@@ -28,6 +28,7 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('DafaWeb');
   });
 
+  // Mocks
   @Component({
     selector: 'app-main-nav',
     template: ''
