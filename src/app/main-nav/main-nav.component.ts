@@ -11,6 +11,7 @@ import { map } from 'rxjs/operators';
 export class MainNavComponent {
 
   @Input() appName: string;
+  @Input() menuDestinations: [] = [];
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(

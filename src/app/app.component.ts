@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'DafaWeb';
+
+  menuDestinations = [
+    { 'name': 'Sample', 'route': '/sample', 'alt': '' },
+    { 'name': 'Log in', 'route': '/login', 'alt': 'Log out' },
+  ];
 }
