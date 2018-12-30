@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormGroupDirective } from '@angular/forms';
+import { ApiService } from '../api.service';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +17,10 @@ export class LoginComponent implements OnInit {
   public isBusy = false;
 
   constructor(
+    private api: ApiService,
+    private auth: AuthService,
     private fb: FormBuilder,
+    private router: Router
   ) {
     this.frm = fb.group({
       email: ['', Validators.required],
@@ -41,7 +47,22 @@ export class LoginComponent implements OnInit {
     const email = this.frm.get('email').value;
     const password = this.frm.get('password').value;
 
-    // TODO: use api to sign-in
+    // Submit request to API
+    this.api
+      .signIn(email, password)
+      .subscribe(
+        (response) => {
+          this.auth.doSignIn(
+            response.token,
+            response.name
+          );
+          this.router.navigate(['/']);
+        },
+        (error) => {
+          this.isBusy = false;
+          this.hasFailed = true;
+        }
+    );
   }
 
 }
