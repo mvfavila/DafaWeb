@@ -17,41 +17,61 @@
       </div>
       <!-- Template Header ends -->
 
-      <!-- Template Body starts -->
-      <div class="login-box-body">
+      <form [(formGroup)] = "frm">
+        <!-- Template Body starts -->
+        <div class="login-box-body">
+  
+          <!-- Markup for getting email starts -->
+          <mat-grid-list cols="9" rowHeight="75px">
+            <mat-grid-tile [rowspan]="1" class="login-icon">
+              <mat-icon>lock</mat-icon>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="7">
+              <mat-form-field class="justifier">
+                <input matInput formControlName="email" placeholder="Your e-mail" text="text" required>
+                <div class="input-errors"
+                  *ngIf="(frm.get('email').invalid && frm.get('email').touched) || showInputErrors">
+                  <div *ngIf="frm.get('email').hasError('required')">
+                    Please enter your e-mail
+                  </div>
+                </div>
+              </mat-form-field>
+            </mat-grid-tile>
+          </mat-grid-list>
+          <!-- Markup for getting email ends -->
+  
+          <!-- Markup for getting Password starts -->
+          <mat-grid-list cols="9" rowHeight="100px">
+            <mat-grid-tile [rowspan]="1" class="login-icon">
+              <mat-icon>remove_red_eye</mat-icon>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="7">
+              <mat-form-field class="justifier">
+                <input matInput formControlName="password" placeholder="Password" text="password" required>
+                <div class="input-errors"
+                  *ngIf="(frm.get('password').invalid && frm.get('password').touched) || showInputErrors">
+                  <div *ngIf="frm.get('password').hasError('required')">
+                    Please enter your password
+                  </div>
+                </div>
+              </mat-form-field>
+            </mat-grid-tile>
+          </mat-grid-list>
+          <!-- Markup for getting Password ends -->
+          
+          <div class="sign-in-error" *ngIf="hasFailed">
+            Invalid e-mail and password.
+          </div>
 
-        <!-- Markup for getting email starts -->
-        <mat-grid-list cols="9" rowHeight="75px">
-          <mat-grid-tile [rowspan]="1" class="login-icon">
-            <mat-icon>lock</mat-icon>
-          </mat-grid-tile>
-          <mat-grid-tile [colspan]="7">
-            <mat-form-field class="justifier">
-              <input matInput placeholder="e-mail" text="text" required>
-            </mat-form-field>
-          </mat-grid-tile>
-        </mat-grid-list>
-        <!-- Markup for getting email ends -->
-
-        <!-- Markup for getting Password starts -->
-        <mat-grid-list cols="9" rowHeight="100px">
-          <mat-grid-tile [rowspan]="1" class="login-icon">
-            <mat-icon>remove_red_eye</mat-icon>
-          </mat-grid-tile>
-          <mat-grid-tile [colspan]="7">
-            <mat-form-field class="justifier">
-              <input matInput placeholder="Password" text="password" required>
-            </mat-form-field>
-          </mat-grid-tile>
-        </mat-grid-list>
-        <!-- Markup for getting Password ends -->
-
-        <button mat-raised-button class="login-button">
-          <mat-icon>input</mat-icon> Login
-        </button>
-
-      </div>
-      <!-- Template Body ends -->
+          <button mat-raised-button class="login-button" (click)="doSignIn()" [disabled]="isBusy">
+            <mat-icon style="padding-right: 5px;">input</mat-icon>
+            <ng-template [ngIf]="!isBusy">Sign in</ng-template>
+            <ng-template [ngIf]="isBusy">Signing in, please wait...</ng-template>
+          </button>
+  
+        </div>
+        <!-- Template Body ends -->
+      </form>
 
     </div>
   </mat-grid-tile>
