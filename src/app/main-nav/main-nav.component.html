@@ -10,8 +10,8 @@
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item
-        *ngFor="let menuDestination of menuDestinations"
-        href="{{menuDestination.route}}">{{menuDestination.name}}</a>
+        *ngFor="let menuDestination of menuDestinations; trackBy: trackByFn"
+        routerLink="/{{menuDestination.route}}">{{menuDestination.name}}</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -27,8 +27,8 @@
       <a href="/">{{ appName }}</a>
       <span class="spacer"></span>
       <div *ngIf="!(isHandset$ | async)">
-        <a *ngFor="let menuDestination of menuDestinations"
-          href="{{menuDestination.route}}">{{menuDestination.name}}</a>
+        <a *ngFor="let menuDestination of menuDestinations; trackBy: trackByFn"
+        routerLink="/{{menuDestination.route}}">{{menuDestination.name}}</a>
       </div>
     </mat-toolbar>
     <ng-content></ng-content>

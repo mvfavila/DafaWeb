@@ -20,4 +20,8 @@ export class MainNavComponent {
 
   constructor(private breakpointObserver: BreakpointObserver) {}
 
+  trackByFn(index, item) {
+    return item.id; // unique id corresponding to the item
+  }
+
 }
