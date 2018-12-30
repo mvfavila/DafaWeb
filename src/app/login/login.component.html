@@ -1,6 +1,6 @@
 <!-- Application header starts -->
 <div class="app-header">
-  <h1 class="app-heading">Olha ai</h1>
+  <h1 class="app-heading">Sign in</h1>
 </div>
 <!-- Application header ends -->
 
@@ -28,7 +28,7 @@
             </mat-grid-tile>
             <mat-grid-tile [colspan]="7">
               <mat-form-field class="justifier">
-                <input matInput formControlName="email" placeholder="Your e-mail" text="text" required>
+                <input matInput formControlName="email" placeholder="Your e-mail" type="email" required>
                 <div class="input-errors"
                   *ngIf="(frm.get('email').invalid && frm.get('email').touched) || showInputErrors">
                   <div *ngIf="frm.get('email').hasError('required')">
@@ -47,7 +47,8 @@
             </mat-grid-tile>
             <mat-grid-tile [colspan]="7">
               <mat-form-field class="justifier">
-                <input matInput formControlName="password" placeholder="Password" text="password" required>
+                <input matInput formControlName="password" placeholder="Password"
+                      type="password" required>
                 <div class="input-errors"
                   *ngIf="(frm.get('password').invalid && frm.get('password').touched) || showInputErrors">
                   <div *ngIf="frm.get('password').hasError('required')">
