@@ -1,3 +1,61 @@
-<p>
-  login works!
-</p>
+<!-- Application header starts -->
+<div class="app-header">
+  <h1 class="app-heading">Olha ai</h1>
+</div>
+<!-- Application header ends -->
+
+<mat-grid-list cols="3">
+  <mat-grid-tile></mat-grid-tile>
+
+  <!-- Writing markup for login starts -->
+  <mat-grid-tile class='login-element'>
+    <div class="login-container">
+
+      <!-- Template Header starts -->
+      <div class="login-box-header">
+        <img src="http://www.dafaconsultoria.com.br/estatico/images/logo.png">
+      </div>
+      <!-- Template Header ends -->
+
+      <!-- Template Body starts -->
+      <div class="login-box-body">
+
+        <!-- Markup for getting email starts -->
+        <mat-grid-list cols="9" rowHeight="75px">
+          <mat-grid-tile [rowspan]="1" class="login-icon">
+            <mat-icon>lock</mat-icon>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="7">
+            <mat-form-field class="justifier">
+              <input matInput placeholder="e-mail" text="text" required>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+        <!-- Markup for getting email ends -->
+
+        <!-- Markup for getting Password starts -->
+        <mat-grid-list cols="9" rowHeight="100px">
+          <mat-grid-tile [rowspan]="1" class="login-icon">
+            <mat-icon>remove_red_eye</mat-icon>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="7">
+            <mat-form-field class="justifier">
+              <input matInput placeholder="Password" text="password" required>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+        <!-- Markup for getting Password ends -->
+
+        <button mat-raised-button class="login-button">
+          <mat-icon>input</mat-icon> Login
+        </button>
+
+      </div>
+      <!-- Template Body ends -->
+
+    </div>
+  </mat-grid-tile>
+  <!-- Writing markup for login ends -->
+  <mat-grid-tile></mat-grid-tile>
+
+</mat-grid-list>

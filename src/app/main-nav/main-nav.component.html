@@ -24,7 +24,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <a href="/">{{ appName }}</a>
+      <a routerLink="/">{{ appName }}</a>
       <span class="spacer"></span>
       <div *ngIf="!(isHandset$ | async)">
         <a *ngFor="let menuDestination of menuDestinations; trackBy: trackByFn"
