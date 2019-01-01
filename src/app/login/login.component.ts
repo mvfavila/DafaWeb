@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormGroupDirective } from '@angular
 import { ApiService } from '../api.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { Login } from './login';
 
 @Component({
   selector: 'app-login',
@@ -50,19 +51,9 @@ export class LoginComponent implements OnInit {
     // Submit request to API
     this.api
       .signIn(email, password)
-      .subscribe(
-        (response) => {
-          this.auth.doSignIn(
-            response.token,
-            response.name
-          );
-          this.router.navigate(['/']);
-        },
-        (error) => {
-          this.isBusy = false;
-          this.hasFailed = true;
-        }
-    );
+      .subscribe((login: Login) => {
+        this.auth.doSignIn(login.user.token, login.user.username, login.user.email);
+        this.router.navigate(['/']);
+      });
   }
-
 }

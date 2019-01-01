@@ -9,9 +9,9 @@
     [opened]="!(isHandset$ | async)">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item
-        *ngFor="let menuDestination of menuDestinations; trackBy: trackByFn"
-        routerLink="/{{menuDestination.route}}">{{menuDestination.name}}</a>
+      <a mat-list-item routerLink="/sample">Sample</a>
+      <a mat-list-item routerLink="/sign-in" *ngIf="!authService.isSignedIn()">Sign in</a>
+      <button mat-button (click)="authService.doSignOut()" *ngIf="authService.isSignedIn()">Sign out</button>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -27,8 +27,9 @@
       <a routerLink="/">{{ appName }}</a>
       <span class="spacer"></span>
       <div *ngIf="!(isHandset$ | async)">
-        <a *ngFor="let menuDestination of menuDestinations; trackBy: trackByFn"
-        routerLink="/{{menuDestination.route}}">{{menuDestination.name}}</a>
+        <a routerLink="/sample">Sample</a>
+        <a routerLink="/sign-in" *ngIf="!authService.isSignedIn()">Sign in</a>
+        <button mat-button (click)="authService.doSignOut()" *ngIf="authService.isSignedIn()">Sign out</button>
       </div>
     </mat-toolbar>
     <ng-content></ng-content>

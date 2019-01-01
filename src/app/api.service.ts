@@ -9,6 +9,7 @@ import {
 import { catchError, tap } from 'rxjs/operators';
 import { SessionService } from './session.service';
 import { Login } from './login/login';
+import { MessageService } from './message.service';
 
 const API_URL = environment.apiUrl;
 
@@ -19,31 +20,38 @@ export class ApiService {
 
   constructor(
     private http: HttpClient,
-    private session: SessionService
+    private session: SessionService,
+    private messageService: MessageService
   ) {
   }
 
-  public signIn(email: string, password: string): Observable<any> {
+  public signIn(email: string, password: string): Observable<Login> {
     return this.http
-      .post(API_URL + '/users/login', {
+      .post<Login>(API_URL + '/users/login', {
         'user': {
           'email': email,
           'password': password
         }
       }).pipe(
+        tap(_ => this.log(`Logged in (email=${email})`)),
         catchError(this.handleError)
       );
   }
 
   private handleError(error: HttpErrorResponse | any) {
+    this.log(`Error: ${error}`);
     console.error('ApiService::handleError', error);
     return Observable.throw(error);
   }
 
-  private getRequestOptions() {
+  private getRequestOptions(email: string) {
     const headers = new HttpHeaders({
-      'authorization': 'Token ' + this.session.accessToken
+      'authorization': 'Token ' + this.session.retrieve().token
     });
     return { headers };
+  }
+
+  private log(message: string) {
+    this.messageService.add(`API Service: ${message}`);
   }
 }
