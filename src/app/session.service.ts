@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { sessionstorage } from 'sessionstorage';
-import { UserSession } from './session';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Token } from './token';
 
 @Injectable({
   providedIn: 'root'
@@ -16,27 +16,27 @@ export class SessionService {
     sessionstorage.clear();
   }
 
-  public store(content: UserSession): void {
-    sessionStorage.setItem(this.key, JSON.stringify(content));
+  public store(rawToken: string): void {
+    sessionStorage.setItem(this.key, rawToken);
   }
 
-  public deleteEnty(): void {
+  public deleteEntry(): void {
     sessionStorage.removeItem(this.key);
   }
 
-  public retrieve(): UserSession {
-    const item = sessionStorage.getItem(this.key);
-    if (item === null) { return new UserSession(); }
+  public retrieve(): Token {
+    const rawToken = sessionStorage.getItem(this.key);
+    if (rawToken === null) { return new Token(); }
 
-    return JSON.parse(sessionStorage.getItem(this.key));
+    const tokenObj = new Token();
+    tokenObj.token = rawToken;
+
+    return tokenObj;
   }
 
-  public exists(): boolean {
-    return !!this.retrieve().token && !this.isExpired();
-  }
+  public hasValidToken(): boolean {
+    const tokenObj = this.retrieve();
 
-  public isExpired(): boolean {
-    const helper = new JwtHelperService();
-    return helper.isTokenExpired(this.retrieve().token);
+    return !tokenObj.isExpired();
   }
 }

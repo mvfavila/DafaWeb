@@ -1,7 +1,6 @@
 export class Login {
-    user: {
-        username: '';
-        email: '';
-        token: '';
-    };
+    username: string;
+    email: string;
+    token: string;
+    roles: [];
 }

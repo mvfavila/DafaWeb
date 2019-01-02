@@ -8,8 +8,8 @@ import {
 } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { SessionService } from './session.service';
-import { Login } from './login/login';
 import { MessageService } from './message.service';
+import { Token } from './token';
 
 const API_URL = environment.apiUrl;
 
@@ -25,9 +25,9 @@ export class ApiService {
   ) {
   }
 
-  public signIn(email: string, password: string): Observable<Login> {
+  public signIn(email: string, password: string): Observable<Token> {
     return this.http
-      .post<Login>(API_URL + '/users/login', {
+      .post<Token>(API_URL + '/users/login', {
         'user': {
           'email': email,
           'password': password
