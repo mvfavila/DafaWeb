@@ -11,8 +11,17 @@ export const dashboardRoutes: Routes = [
     component: LayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', component: HomeComponent },
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
+      },
+      {
+        path: 'home',
+        component: HomeComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['basic'] }
+      },
       {
         path: 'admin',
         component: AdminComponent,

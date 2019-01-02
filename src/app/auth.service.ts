@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SessionService } from './session.service';
-import { MessageService } from './message.service';
 import { Router } from '@angular/router';
-import { Login } from './login/login';
 import { Token } from './token';
 
 @Injectable({
@@ -12,7 +10,6 @@ export class AuthService {
 
   constructor(
     private session: SessionService,
-    private messageService: MessageService,
     private router: Router
   ) {
   }
