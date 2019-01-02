@@ -17,7 +17,7 @@ export const dashboardRoutes: Routes = [
         path: 'admin',
         component: AdminComponent,
         canActivate: [RoleGuard],
-        data: {role: 'basic'}
+        data: { roles: ['basic'] }
       }
     ]
   }
