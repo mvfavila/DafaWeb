@@ -57,6 +57,11 @@ export class LoginComponent implements OnInit {
       .subscribe((token: Token) => {
         this.auth.doSignIn(token);
         this.router.navigate(['/']);
-      });
+      },
+      (error) => {
+        this.isBusy = false;
+        this.hasFailed = true;
+      }
+    );
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import {
   HttpClient,
   HttpErrorResponse,
@@ -39,7 +39,7 @@ export class ApiService {
   }
 
   private handleError(error: HttpErrorResponse | any) {
-    return Observable.throw(error);
+    return throwError(error);
   }
 
   private getRequestOptions(email: string) {
