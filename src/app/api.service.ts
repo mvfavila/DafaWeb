@@ -39,8 +39,6 @@ export class ApiService {
   }
 
   private handleError(error: HttpErrorResponse | any) {
-    this.log(`Error: ${error}`);
-    console.error('ApiService::handleError', error);
     return Observable.throw(error);
   }
 
