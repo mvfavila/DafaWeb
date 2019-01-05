@@ -26,7 +26,7 @@ export class ClientsCompResolver implements Resolve<Client[]> {
     //   message: error.message,
     //   type: '' // MessageType.error
     // });
-    return throwError(error);
+    return throwError(error.message || error);
   }
 
 }

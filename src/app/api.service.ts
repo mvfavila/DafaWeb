@@ -50,7 +50,7 @@ export class ApiService {
   }
 
   private handleError(error: HttpErrorResponse | any) {
-    return throwError(error);
+    return throwError(error.message || error);
   }
 
   private getRequestOptions() {
