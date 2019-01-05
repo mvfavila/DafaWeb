@@ -6,13 +6,16 @@ import { RouterModule } from '@angular/router';
 import { dashboardRoutes } from './dashboard.routes';
 import { AuthGuard } from '../guards/auth-guard.service';
 import { RoleGuard } from '../guards/role-guard.service';
-import { ClientsComponent } from './clients/clients.component';
 import { HomeComponent } from './home/home.component';
-import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule } from '@angular/material';
+import {
+  MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule,
+  MatTableModule, MatPaginatorModule, MatSortModule
+} from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
+import { ClientsComponent } from './clients/clients.component';
 
 @NgModule({
-  declarations: [LayoutComponent, AdminComponent, ClientsComponent, HomeComponent],
+  declarations: [LayoutComponent, AdminComponent, HomeComponent, ClientsComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(dashboardRoutes),
@@ -21,7 +24,10 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
-    LayoutModule
+    LayoutModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [AuthGuard, RoleGuard],
 })

@@ -3,9 +3,9 @@ import { LayoutComponent } from './layout/layout.component';
 import { AdminComponent } from './admin/admin.component';
 import { AuthGuard } from '../guards/auth-guard.service';
 import { RoleGuard } from '../guards/role-guard.service';
-import { ClientsComponent } from './clients/clients.component';
 import { ClientsCompResolver } from '../resolvers/clients-comp.service';
 import { HomeComponent } from './home/home.component';
+import { ClientsComponent } from './clients/clients.component';
 
 export const dashboardRoutes: Routes = [
   {
