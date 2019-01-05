@@ -21,6 +21,7 @@ export const dashboardRoutes: Routes = [
       {
         path: 'home',
         component: HomeComponent,
+        resolve: { pageData: ClientsCompResolver  },
         canActivate: [RoleGuard],
         data: { roles: ['basic'] }
       },
