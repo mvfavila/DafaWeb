@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
-import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
 import { AuthGuard } from '../guards/auth-guard.service';
 import { RoleGuard } from '../guards/role-guard.service';
 import { ClientsComponent } from './clients/clients.component';
 import { ClientsCompResolver } from '../resolvers/clients-comp.service';
+import { HomeComponent } from './home/home.component';
 
 export const dashboardRoutes: Routes = [
   {
