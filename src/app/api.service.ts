@@ -10,6 +10,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { SessionService } from './session.service';
 import { MessageService } from './message.service';
 import { Token } from './token';
+import { Client } from './models/client';
 
 const API_URL = environment.apiUrl;
 
@@ -38,11 +39,21 @@ export class ApiService {
       );
   }
 
+  public getClients(): Observable<Client[]> {
+    const options = this.getRequestOptions();
+    return this.http
+      .get<Client[]>(API_URL + '/clients', options)
+      .pipe(
+        tap(_ => this.log(`Fetched all clients`)),
+        catchError(this.handleError)
+      );
+  }
+
   private handleError(error: HttpErrorResponse | any) {
     return throwError(error);
   }
 
-  private getRequestOptions(email: string) {
+  private getRequestOptions() {
     const headers = new HttpHeaders({
       'authorization': 'Token ' + this.session.retrieve().token
     });

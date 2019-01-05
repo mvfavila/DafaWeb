@@ -1,0 +1,18 @@
+<div style="padding-top: 1rem">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">e-mail</th>
+        <th scope="col">Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let client of clients">
+        <th scope="row">{{client.name}}</th>
+        <td>{{client.email}}</td>
+        <td>{{client.createdAt | date}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

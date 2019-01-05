@@ -18,6 +18,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RouterModule } from '@angular/router';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { ClientsCompResolver } from './resolvers/clients-comp.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
     HttpClientModule,
     DashboardModule
   ],
-  providers: [],
+  providers: [ClientsCompResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

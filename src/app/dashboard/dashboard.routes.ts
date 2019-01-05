@@ -4,6 +4,8 @@ import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
 import { AuthGuard } from '../guards/auth-guard.service';
 import { RoleGuard } from '../guards/role-guard.service';
+import { ClientsComponent } from './clients/clients.component';
+import { ClientsCompResolver } from '../resolvers/clients-comp.service';
 
 export const dashboardRoutes: Routes = [
   {
@@ -27,7 +29,14 @@ export const dashboardRoutes: Routes = [
         component: AdminComponent,
         canActivate: [RoleGuard],
         data: { roles: ['basic'] }
-      }
+      },
+      {
+        path: 'clients',
+        component: ClientsComponent,
+        resolve: { pageData: ClientsCompResolver  },
+        canActivate: [RoleGuard],
+        data: { roles: ['basic'] }
+      },
     ]
   }
 ];
