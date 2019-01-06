@@ -1,13 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSlideToggleChange } from '@angular/material';
+import { ClientItem } from 'src/app/models/client';
+import { DataTransferService } from '../data-transfer.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client',
   templateUrl: './client.component.html',
   styleUrls: ['./client.component.scss']
 })
-export class ClientComponent {
+export class ClientComponent implements OnInit {
   clientForm = this.fb.group({
     company: [null, Validators.required],
     firstName: [null, Validators.required],
@@ -23,7 +26,8 @@ export class ClientComponent {
   });
 
   hasUnitNumber = false;
-  active = true;
+  active = false;
+  client: ClientItem;
 
   states = [
     {name: 'Alagoas', abbreviation: 'AL'},
@@ -37,7 +41,21 @@ export class ClientComponent {
     {name: 'Sergipe', abbreviation: 'SE'},
   ];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,
+    private dataTransferService: DataTransferService,
+    private router: Router,
+  ) {}
+
+  ngOnInit() {
+    const data = this.dataTransferService.getData();
+    if (!data) {
+      alert('Invalid data');
+      this.router.navigate(['/dashboard']);
+    } else {
+      this.client = data;
+      this.clientForm.patchValue(this.client);
+    }
+  }
 
   onSubmit() {
     alert('Thanks!');

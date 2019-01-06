@@ -3,6 +3,7 @@ import { MatPaginator, MatSort } from '@angular/material';
 import { ClientsDataSource } from './clients-datasource';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClientItem } from 'src/app/models/client';
+import { DataTransferService } from '../data-transfer.service';
 
 @Component({
   selector: 'app-clients',
@@ -19,7 +20,10 @@ export class ClientsComponent implements OnInit {
 
   clients: ClientItem[] = [];
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private dataTransferService: DataTransferService,
+  ) {}
 
   ngOnInit() {
     this.clients = this.route.snapshot.data.pageData.clients || [];
@@ -27,6 +31,7 @@ export class ClientsComponent implements OnInit {
   }
 
   public selectClient(client: ClientItem) {
+    this.dataTransferService.setData(client);
     this.router.navigate(['/dashboard/client']);
   }
 }

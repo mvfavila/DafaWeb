@@ -16,9 +16,16 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { ClientsComponent } from './clients/clients.component';
 import { ClientComponent } from './client/client.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DataTransferService } from './data-transfer.service';
 
 @NgModule({
-  declarations: [LayoutComponent, AdminComponent, HomeComponent, ClientsComponent, ClientComponent],
+  declarations: [
+    LayoutComponent,
+    AdminComponent,
+    HomeComponent,
+    ClientsComponent,
+    ClientComponent
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(dashboardRoutes),
@@ -37,6 +44,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSlideToggleModule,
     ReactiveFormsModule
   ],
-  providers: [AuthGuard, RoleGuard],
+  providers: [
+    AuthGuard,
+    RoleGuard,
+    DataTransferService
+  ],
 })
 export class DashboardModule { }
