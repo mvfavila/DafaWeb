@@ -26,8 +26,6 @@ export class ClientComponent implements OnInit {
   });
 
   hasUnitNumber = false;
-  active = false;
-  client: ClientItem;
 
   states = [
     {name: 'Alagoas', abbreviation: 'AL'},
@@ -52,8 +50,7 @@ export class ClientComponent implements OnInit {
       alert('Invalid data');
       this.router.navigate(['/dashboard']);
     } else {
-      this.client = data;
-      this.clientForm.patchValue(this.client);
+      this.clientForm.patchValue(data);
     }
   }
 

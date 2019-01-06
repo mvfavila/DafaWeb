@@ -86,8 +86,8 @@
       </div>
       <div class="row">
         <div class="col">
-            <mat-slide-toggle [checked]="active" (change)="onChange($event)">
-              {{active ? 'Active' : 'Inactive'}}
+            <mat-slide-toggle [checked]="clientForm.controls['active'].value" (change)="onChange($event)">
+              Active
             </mat-slide-toggle>
         </div>
       </div>
