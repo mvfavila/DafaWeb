@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { ClientsDataSource } from './clients-datasource';
 import { ActivatedRoute } from '@angular/router';
-import { Client } from 'src/app/models/client';
+import { ClientItem } from 'src/app/models/client';
 
 @Component({
   selector: 'app-clients',
@@ -17,12 +17,16 @@ export class ClientsComponent implements OnInit {
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['id', 'name'];
 
-  clients: Client[] = [];
+  clients: ClientItem[] = [];
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.clients = this.route.snapshot.data.pageData.clients || [];
     this.dataSource = new ClientsDataSource(this.paginator, this.sort, this.clients);
+  }
+
+  public selectClient(client: ClientItem) {
+
   }
 }
