@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { ClientsDataSource } from './clients-datasource';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClientItem } from 'src/app/models/client';
 
 @Component({
@@ -19,7 +19,7 @@ export class ClientsComponent implements OnInit {
 
   clients: ClientItem[] = [];
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     this.clients = this.route.snapshot.data.pageData.clients || [];
@@ -27,6 +27,6 @@ export class ClientsComponent implements OnInit {
   }
 
   public selectClient(client: ClientItem) {
-
+    this.router.navigate(['/dashboard/client']);
   }
 }

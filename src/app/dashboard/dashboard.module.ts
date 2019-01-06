@@ -9,13 +9,16 @@ import { RoleGuard } from '../guards/role-guard.service';
 import { HomeComponent } from './home/home.component';
 import {
   MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule,
-  MatTableModule, MatPaginatorModule, MatSortModule
+  MatTableModule, MatPaginatorModule, MatSortModule, MatInputModule, MatSelectModule,
+  MatRadioModule, MatSlideToggleModule
 } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import { ClientsComponent } from './clients/clients.component';
+import { ClientComponent } from './client/client.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [LayoutComponent, AdminComponent, HomeComponent, ClientsComponent],
+  declarations: [LayoutComponent, AdminComponent, HomeComponent, ClientsComponent, ClientComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(dashboardRoutes),
@@ -27,7 +30,12 @@ import { ClientsComponent } from './clients/clients.component';
     LayoutModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatInputModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatSlideToggleModule,
+    ReactiveFormsModule
   ],
   providers: [AuthGuard, RoleGuard],
 })

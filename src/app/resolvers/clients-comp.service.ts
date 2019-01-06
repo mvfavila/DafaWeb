@@ -4,14 +4,14 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ApiService } from '../api.service';
-import { Client } from '../models/client';
+import { ClientItem } from '../models/client';
 
 @Injectable()
-export class ClientsCompResolver implements Resolve<Client[]> {
+export class ClientsCompResolver implements Resolve<ClientItem[]> {
 
   constructor(private api: ApiService) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Client[]> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ClientItem[]> {
     return this.api.getClients()
     .pipe(
       map((result) => {

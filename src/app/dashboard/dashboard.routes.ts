@@ -6,6 +6,7 @@ import { RoleGuard } from '../guards/role-guard.service';
 import { ClientsCompResolver } from '../resolvers/clients-comp.service';
 import { HomeComponent } from './home/home.component';
 import { ClientsComponent } from './clients/clients.component';
+import { ClientComponent } from './client/client.component';
 
 export const dashboardRoutes: Routes = [
   {
@@ -28,6 +29,12 @@ export const dashboardRoutes: Routes = [
       {
         path: 'admin',
         component: AdminComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['basic'] }
+      },
+      {
+        path: 'client',
+        component: ClientComponent,
         canActivate: [RoleGuard],
         data: { roles: ['basic'] }
       },
