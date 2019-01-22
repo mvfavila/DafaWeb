@@ -66,7 +66,7 @@
         <div class="col">
           <mat-form-field class="full-width">
             <mat-select placeholder="State" formControlName="state">
-              <mat-option *ngFor="let state of states" [value]="state.abbreviation">
+              <mat-option *ngFor="let state of states" [value]="state.name">
                 {{ state.name }}
               </mat-option>
             </mat-select>
@@ -79,14 +79,17 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput #postalCode maxlength="5" placeholder="Postal Code" type="number" formControlName="postalCode">
-            <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+            <input matInput #postalCode maxlength="9" placeholder="Postal Code" type="text" formControlName="postalCode">
+            <mat-error *ngIf="clientForm.controls['postalCode'].hasError('pattern')">
+              Please use <strong>00000-000</strong>
+            </mat-error>
+            <mat-hint align="end">{{postalCode.value.length}} / 9</mat-hint>
           </mat-form-field>
         </div>
       </div>
       <div class="row">
         <div class="col">
-            <mat-slide-toggle [checked]="clientForm.controls['active'].value" (change)="onChange($event)">
+            <mat-slide-toggle (change)="onChange($event)" [checked]="clientForm.controls['active'].value">
               Active
             </mat-slide-toggle>
         </div>

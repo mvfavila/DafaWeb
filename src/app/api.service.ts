@@ -49,6 +49,29 @@ export class ApiService {
       );
   }
 
+  public updateClient(client: ClientItem): Observable<ClientItem> {
+    const options = this.getRequestOptions();
+    return this.http
+      .put<ClientItem>(API_URL + '/clients', {
+        'client': {
+          'clientId': client._id,
+          'firstName': client.firstName,
+          'lastName': client.lastName,
+          'company': client.company,
+          'address': client.address,
+          'city': client.city,
+          'state': client.state,
+          'postalCode': client.postalCode,
+          'email': client.email,
+          'active': client.active,
+        }
+      }, options)
+      .pipe(
+        tap(_ => this.log(`Updated client`)),
+        catchError(this.handleError)
+      );
+  }
+
   private handleError(error: HttpErrorResponse | any) {
     return throwError(error.message || error);
   }
