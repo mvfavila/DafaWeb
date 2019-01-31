@@ -54,7 +54,7 @@ export class ApiService {
     return this.http
       .put<ClientItem>(API_URL + '/clients', {
         'client': {
-          'clientId': client._id,
+          'id': client._id,
           'firstName': client.firstName,
           'lastName': client.lastName,
           'company': client.company,
