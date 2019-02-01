@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatSlideToggleChange } from '@angular/material';
 import { ClientItem } from 'src/app/models/client';
 import { DataTransferService } from '../data-transfer.service';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-client',
@@ -47,6 +47,7 @@ export class ClientComponent implements OnInit {
     private dataTransferService: DataTransferService,
     private router: Router,
     private api: ApiService,
+    public snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -61,6 +62,12 @@ export class ClientComponent implements OnInit {
       // Put client back in the data transfer service
       this.dataTransferService.setData(data);
     }
+  }
+
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 2000
+    });
   }
 
   onSubmit() {
@@ -94,10 +101,13 @@ export class ClientComponent implements OnInit {
       .subscribe((clientItem: ClientItem) => {
         this.isBusy = false;
         this.hasFailed = false;
+
+        this.openSnackBar('Success');
       },
       (error) => {
         this.isBusy = false;
         this.hasFailed = true;
+        this.openSnackBar('Fail');
       }
     );
   }

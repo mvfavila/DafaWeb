@@ -10,13 +10,14 @@ import { HomeComponent } from './home/home.component';
 import {
   MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule,
   MatTableModule, MatPaginatorModule, MatSortModule, MatInputModule, MatSelectModule,
-  MatRadioModule, MatSlideToggleModule
+  MatRadioModule, MatSlideToggleModule, MatSnackBarModule
 } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import { ClientsComponent } from './clients/clients.component';
 import { ClientComponent } from './client/client.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DataTransferService } from './data-transfer.service';
+import { SnackBarMessageComponent } from './snack-bar-message/snack-bar-message.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DataTransferService } from './data-transfer.service';
     AdminComponent,
     HomeComponent,
     ClientsComponent,
-    ClientComponent
+    ClientComponent,
+    SnackBarMessageComponent,
   ],
   imports: [
     CommonModule,
@@ -42,6 +44,7 @@ import { DataTransferService } from './data-transfer.service';
     MatSelectModule,
     MatRadioModule,
     MatSlideToggleModule,
+    MatSnackBarModule,
     ReactiveFormsModule
   ],
   providers: [
@@ -49,5 +52,9 @@ import { DataTransferService } from './data-transfer.service';
     RoleGuard,
     DataTransferService
   ],
+  entryComponents: [
+    ClientComponent,
+    SnackBarMessageComponent
+  ]
 })
 export class DashboardModule { }
