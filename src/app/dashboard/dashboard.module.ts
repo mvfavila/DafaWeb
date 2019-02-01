@@ -17,7 +17,6 @@ import { ClientsComponent } from './clients/clients.component';
 import { ClientComponent } from './client/client.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DataTransferService } from './data-transfer.service';
-import { SnackBarMessageComponent } from './snack-bar-message/snack-bar-message.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +25,6 @@ import { SnackBarMessageComponent } from './snack-bar-message/snack-bar-message.
     HomeComponent,
     ClientsComponent,
     ClientComponent,
-    SnackBarMessageComponent,
   ],
   imports: [
     CommonModule,
@@ -54,7 +52,6 @@ import { SnackBarMessageComponent } from './snack-bar-message/snack-bar-message.
   ],
   entryComponents: [
     ClientComponent,
-    SnackBarMessageComponent
   ]
 })
 export class DashboardModule { }
