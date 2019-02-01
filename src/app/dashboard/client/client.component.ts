@@ -65,7 +65,7 @@ export class ClientComponent implements OnInit {
   }
 
   openSnackBar(message: string) {
-    this.snackBar.open(message, 'Close', {
+    return this.snackBar.open(message, 'Close', {
       duration: 2000
     });
   }
@@ -102,7 +102,10 @@ export class ClientComponent implements OnInit {
         this.isBusy = false;
         this.hasFailed = false;
 
-        this.openSnackBar('Success');
+        const snackBarRef = this.openSnackBar('Success');
+        snackBarRef.afterDismissed().subscribe(() => {
+          this.router.navigate(['/dashboard']);
+        });
       },
       (error) => {
         this.isBusy = false;
