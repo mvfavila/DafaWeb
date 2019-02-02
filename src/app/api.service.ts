@@ -11,6 +11,7 @@ import { SessionService } from './session.service';
 import { MessageService } from './message.service';
 import { Token } from './token';
 import { ClientItem } from './models/client';
+import { EventWarningFieldItem } from './models/EventWarningField';
 
 const API_URL = environment.apiUrl;
 
@@ -68,6 +69,16 @@ export class ApiService {
       }, options)
       .pipe(
         tap(_ => this.log(`Updated client`)),
+        catchError(this.handleError)
+      );
+  }
+
+  public getEventWarningsFields(): Observable<EventWarningFieldItem[]> {
+    const options = this.getRequestOptions();
+    return this.http
+      .get<EventWarningFieldItem[]>(API_URL + '/eventWarningsFields', options)
+      .pipe(
+        tap(_ => this.log(`Fetched all event warnings from fields`)),
         catchError(this.handleError)
       );
   }
