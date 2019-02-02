@@ -11,7 +11,7 @@ import { SessionService } from './session.service';
 import { MessageService } from './message.service';
 import { Token } from './token';
 import { ClientItem } from './models/client';
-import { EventWarningFieldItem } from './models/EventWarningField';
+import { EventWarningFieldItem } from './models/eventWarningField';
 
 const API_URL = environment.apiUrl;
 

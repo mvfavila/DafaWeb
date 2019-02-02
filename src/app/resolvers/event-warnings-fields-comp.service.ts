@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ApiService } from '../api.service';
-import { EventWarningFieldItem } from '../models/EventWarningField';
+import { EventWarningFieldItem } from '../models/eventWarningField';
 
 @Injectable()
 export class EventWarningsFieldsCompResolver implements Resolve<EventWarningFieldItem[]> {

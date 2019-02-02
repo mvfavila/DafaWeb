@@ -2,7 +2,7 @@ import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator, MatSort } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
-import { EventWarningFieldItem } from 'src/app/models/EventWarningField';
+import { EventWarningFieldItem } from 'src/app/models/eventWarningField';
 
 /**
  * Data source for the EventWarningsFields view. This class should

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataTransferService } from '../data-transfer.service';
-import { EventWarningFieldItem } from 'src/app/models/EventWarningField';
+import { EventWarningFieldItem } from 'src/app/models/eventWarningField';
 import { EventWarningsFieldsDataSource } from './event-warnings-fields-datasource';
 
 @Component({
