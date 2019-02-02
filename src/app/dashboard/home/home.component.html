@@ -14,7 +14,7 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
+              <button mat-menu-item>Add</button>
               <button mat-menu-item>Remove</button>
             </mat-menu>
           </mat-card-title>
@@ -39,7 +39,7 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
+              <button mat-menu-item>Add</button>
               <button mat-menu-item>Remove</button>
             </mat-menu>
           </mat-card-title>
@@ -56,15 +56,11 @@
             <button
               mat-icon-button
               class="more-button"
-              [matMenuTriggerFor]="menu"
-              aria-label="Toggle menu"
+              aria-label="Add client"
+              routerLink='/dashboard/client'
             >
-              <mat-icon>more_vert</mat-icon>
+              <mat-icon>add_circle_outline</mat-icon>
             </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu>
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
@@ -87,7 +83,7 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
+              <button mat-menu-item>Add</button>
               <button mat-menu-item>Remove</button>
             </mat-menu>
           </mat-card-title>

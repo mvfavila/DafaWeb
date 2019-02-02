@@ -53,10 +53,7 @@ export class ClientComponent implements OnInit {
   ngOnInit() {
     // Grab client from data transfer service
     const data = this.dataTransferService.getData();
-    if (!data) {
-      alert('Invalid data');
-      this.router.navigate(['/dashboard']);
-    } else {
+    if (data) {
       // Fill form
       this.clientForm.patchValue(data);
       // Put client back in the data transfer service
