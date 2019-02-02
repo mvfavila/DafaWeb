@@ -26,7 +26,7 @@ export class ClientsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.clients = this.route.snapshot.data.pageData.clients || [];
+    this.clients = this.route.snapshot.data.clientsData.clients || [];
     this.dataSource = new ClientsDataSource(this.paginator, this.sort, this.clients);
   }
 

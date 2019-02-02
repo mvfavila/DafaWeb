@@ -7,6 +7,8 @@ import { ClientsCompResolver } from '../resolvers/clients-comp.service';
 import { HomeComponent } from './home/home.component';
 import { ClientsComponent } from './clients/clients.component';
 import { ClientComponent } from './client/client.component';
+import { EventWarningsFieldsCompResolver } from '../resolvers/event-warnings-fields-comp.service';
+import { EventWarningsComponent } from './event-warnings/event-warnings.component';
 
 export const dashboardRoutes: Routes = [
   {
@@ -22,7 +24,7 @@ export const dashboardRoutes: Routes = [
       {
         path: 'home',
         component: HomeComponent,
-        resolve: { pageData: ClientsCompResolver  },
+        resolve: { clientsData: ClientsCompResolver, eventWarningsData: EventWarningsFieldsCompResolver },
         canActivate: [RoleGuard],
         data: { roles: ['basic'] }
       },
@@ -41,7 +43,14 @@ export const dashboardRoutes: Routes = [
       {
         path: 'clients',
         component: ClientsComponent,
-        resolve: { pageData: ClientsCompResolver  },
+        resolve: { clientsData: ClientsCompResolver  },
+        canActivate: [RoleGuard],
+        data: { roles: ['basic'] }
+      },
+      {
+        path: 'eventWarnings',
+        component: EventWarningsComponent,
+        resolve: { eventWarningsData: EventWarningsFieldsCompResolver  },
         canActivate: [RoleGuard],
         data: { roles: ['basic'] }
       },

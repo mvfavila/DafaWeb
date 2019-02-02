@@ -25,7 +25,7 @@ export class EventWarningsComponent implements OnInit {
     private dataTransferService: DataTransferService) { }
 
   ngOnInit() {
-    this.eventWarnings = this.route.snapshot.data.pageData.eventWarnings || [];
+    this.eventWarnings = this.route.snapshot.data.eventWarningsData.eventWarnings || [];
     this.dataSource = new EventWarningsFieldsDataSource(this.paginator, this.sort, this.eventWarnings);
   }
 

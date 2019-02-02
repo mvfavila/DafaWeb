@@ -19,6 +19,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { RouterModule } from '@angular/router';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { ClientsCompResolver } from './resolvers/clients-comp.service';
+import { EventWarningsFieldsCompResolver } from './resolvers/event-warnings-fields-comp.service';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,7 @@ import { ClientsCompResolver } from './resolvers/clients-comp.service';
     HttpClientModule,
     DashboardModule
   ],
-  providers: [ClientsCompResolver],
+  providers: [ClientsCompResolver, EventWarningsFieldsCompResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
