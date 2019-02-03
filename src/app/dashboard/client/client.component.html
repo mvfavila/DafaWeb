@@ -8,15 +8,11 @@
             <button
               mat-icon-button
               class="more-button"
-              [matMenuTriggerFor]="menu"
+              (click)="addField()"
               aria-label="Toggle menu"
             >
-              <mat-icon>more_vert</mat-icon>
+              <mat-icon>add_circle_outline</mat-icon>
             </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Add</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu>
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
@@ -73,13 +69,6 @@
             <mat-error *ngIf="clientForm.controls['address'].hasError('required')">
               Address is <strong>required</strong>
             </mat-error>
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="row" *ngIf="hasUnitNumber">
-        <div class="col">
-          <mat-form-field class="full-width">
-            <textarea matInput placeholder="Address 2" formControlName="address2"></textarea>
           </mat-form-field>
         </div>
       </div>

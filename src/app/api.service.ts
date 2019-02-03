@@ -12,6 +12,7 @@ import { MessageService } from './message.service';
 import { Token } from './token';
 import { ClientItem } from './models/client';
 import { EventWarningFieldItem } from './models/eventWarningField';
+import { FieldItem } from './models/field';
 
 const API_URL = environment.apiUrl;
 
@@ -91,6 +92,51 @@ export class ApiService {
       }, options)
       .pipe(
         tap(_ => this.log(`Updated client`)),
+        catchError(this.handleError)
+      );
+  }
+
+  public createField(field: FieldItem): Observable<FieldItem> {
+    const options = this.getRequestOptions();
+    return this.http
+      .post<FieldItem>(API_URL + '/fields', {
+        'field': {
+          'name': field.name,
+          'description': field.description,
+          'email': field.email,
+          'address': field.address,
+          'city': field.city,
+          'state': field.state,
+          'postalCode': field.postalCode,
+          'active': field.active,
+          'client': field.client,
+        }
+      }, options)
+      .pipe(
+        tap(_ => this.log(`Created field`)),
+        catchError(this.handleError)
+      );
+  }
+
+  public updateField(field: FieldItem): Observable<FieldItem> {
+    const options = this.getRequestOptions();
+    return this.http
+      .put<FieldItem>(API_URL + '/fields', {
+        'field': {
+          'id': field.id,
+          'name': field.name,
+          'description': field.description,
+          'email': field.email,
+          'address': field.address,
+          'city': field.city,
+          'state': field.state,
+          'postalCode': field.postalCode,
+          'active': field.active,
+          'client': field.client,
+        }
+      }, options)
+      .pipe(
+        tap(_ => this.log(`Updated field`)),
         catchError(this.handleError)
       );
   }

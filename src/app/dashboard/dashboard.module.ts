@@ -19,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DataTransferService } from './data-transfer.service';
 import { EventWarningsComponent } from './event-warnings/event-warnings.component';
 import { EventWarningComponent } from './event-warning/event-warning.component';
+import { FieldComponent } from './field/field.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { EventWarningComponent } from './event-warning/event-warning.component';
     ClientComponent,
     EventWarningsComponent,
     EventWarningComponent,
+    FieldComponent,
   ],
   imports: [
     CommonModule,

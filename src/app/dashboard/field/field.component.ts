@@ -1,30 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ClientItem, Client } from 'src/app/models/client';
 import { DataTransferService } from '../data-transfer.service';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { MatSnackBar } from '@angular/material';
-import { Field } from 'src/app/models/field';
+import { Field, FieldItem } from 'src/app/models/field';
 
 @Component({
-  selector: 'app-client',
-  templateUrl: './client.component.html',
-  styleUrls: ['./client.component.scss']
+  selector: 'app-field',
+  templateUrl: './field.component.html',
+  styleUrls: ['./field.component.scss']
 })
-export class ClientComponent implements OnInit {
-  clientForm = this.fb.group({
-    company: [null, Validators.required],
-    firstName: [null, Validators.required],
-    lastName: [null, Validators.required],
-    email: [null, Validators.required], // TODO: add pattern validator
-    address: [null, Validators.required],
-    city: [null, Validators.required],
-    state: [null, Validators.required],
+export class FieldComponent implements OnInit {
+  fieldForm = this.fb.group({
+    name: [null, Validators.required],
+    description: [null],
+    email: [null],
+    address: [null],
+    city: [null],
+    state: [null],
     postalCode: [null, Validators.compose([
       Validators.pattern('[0-9]{5}-[0-9]{3}')])
     ],
     active: false,
+    clientId: [null]
   });
 
   public hasUnitNumber = false;
@@ -53,12 +52,12 @@ export class ClientComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Grab client from data transfer service
+    // Grab field from data transfer service
     this.data = this.dataTransferService.getData();
     if (this.data) {
       // Fill form
-      this.clientForm.patchValue(this.data);
-      // Put client back in the data transfer service
+      this.fieldForm.patchValue(this.data);
+      // Put field back in the data transfer service
       this.dataTransferService.setData(this.data);
     }
   }
@@ -71,7 +70,7 @@ export class ClientComponent implements OnInit {
 
   onSubmit() {
     // Make sure form values are valid
-    if (this.clientForm.invalid) {
+    if (this.fieldForm.invalid) {
       this.showInputErrors = true;
       return;
     }
@@ -80,55 +79,41 @@ export class ClientComponent implements OnInit {
     this.isBusy = true;
     this.hasFailed = false;
 
-    // Grab client from data transfer service
-    let client = this.dataTransferService.getData();
-    let newClient = false;
-    if (!client) {
-      client = new Client();
-      newClient = true;
+    // Grab field from data transfer service
+    let field = this.dataTransferService.getData();
+    let newField = false;
+    if (!field.id) {
+      field = new Field();
+      newField = true;
     }
 
     // Grab values from form
-    client.firstName = this.clientForm.value['firstName'];
-    client.lastName = this.clientForm.value['lastName'];
-    client.company = this.clientForm.value['company'];
-    client.address = this.clientForm.value['address'];
-    client.city = this.clientForm.value['city'];
-    client.state = this.clientForm.value['state'];
-    client.postalCode = this.clientForm.value['postalCode'];
-    client.email = this.clientForm.value['email'];
-    client.active = this.clientForm.value['active'];
+    field.name = this.fieldForm.value['name'];
+    field.description = this.fieldForm.value['description'];
+    field.address = this.fieldForm.value['address'];
+    field.city = this.fieldForm.value['city'];
+    field.state = this.fieldForm.value['state'];
+    field.postalCode = this.fieldForm.value['postalCode'];
+    field.email = this.fieldForm.value['email'];
+    field.active = this.fieldForm.value['active'];
+    field.client = this.data.client;
 
     // Submit request to API
-    if (newClient) {
-      this.createClient(client);
+    if (newField) {
+      this.createField(field);
     } else {
-      this.updateClient(client);
+      this.updateField(field);
     }
   }
 
-  public addField() {
-    // Grab client from data transfer service
-    this.data = this.dataTransferService.getData();
-
-    const newField = new Field();
-    newField.client = this.data._id;
-
-    // Put newField (with cliendId) in the data transfer service
-    this.dataTransferService.setData(newField);
-
-    // redirect to field component
-    this.router.navigate(['/dashboard/field']);
-  }
-
-  private createClient(client: ClientItem) {
+  private createField(field: FieldItem) {
     this.api
-      .createClient(client)
-      .subscribe((clientItem: ClientItem) => {
+      .createField(field)
+      .subscribe((fieldItem: FieldItem) => {
         this.isBusy = false;
         this.hasFailed = false;
 
-        const snackBarRef = this.openSnackBar('Client created');
+        const snackBarRef = this.openSnackBar('Field created');
         snackBarRef.afterDismissed().subscribe(() => {
           this.router.navigate(['/dashboard']);
         });
@@ -141,14 +126,14 @@ export class ClientComponent implements OnInit {
     );
   }
 
-  private updateClient(client: ClientItem) {
+  private updateField(field: FieldItem) {
     this.api
-      .updateClient(client)
-      .subscribe((clientItem: ClientItem) => {
+      .updateField(field)
+      .subscribe((fieldItem: FieldItem) => {
         this.isBusy = false;
         this.hasFailed = false;
 
-        const snackBarRef = this.openSnackBar('Client updated');
+        const snackBarRef = this.openSnackBar('Field updated');
         snackBarRef.afterDismissed().subscribe(() => {
           this.router.navigate(['/dashboard']);
         });
@@ -163,9 +148,9 @@ export class ClientComponent implements OnInit {
 
   onChange(e: { checked: boolean; }) {
       if (e.checked === true) {
-        this.clientForm.controls['active'].setValue(true);
+        this.fieldForm.controls['active'].setValue(true);
       } else {
-        this.clientForm.controls['active'].setValue(false);
+        this.fieldForm.controls['active'].setValue(false);
       }
   }
 }
