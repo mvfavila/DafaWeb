@@ -20,6 +20,7 @@ import { DataTransferService } from './data-transfer.service';
 import { EventWarningsComponent } from './event-warnings/event-warnings.component';
 import { EventWarningComponent } from './event-warning/event-warning.component';
 import { FieldComponent } from './field/field.component';
+import { FieldsComponent } from './fields/fields.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { FieldComponent } from './field/field.component';
     EventWarningsComponent,
     EventWarningComponent,
     FieldComponent,
+    FieldsComponent,
   ],
   imports: [
     CommonModule,

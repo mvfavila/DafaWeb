@@ -11,6 +11,8 @@ import { EventWarningsFieldsCompResolver } from '../resolvers/event-warnings-fie
 import { EventWarningsComponent } from './event-warnings/event-warnings.component';
 import { EventWarningComponent } from './event-warning/event-warning.component';
 import { FieldComponent } from './field/field.component';
+import { FieldsComponent } from './fields/fields.component';
+import { FieldsCompResolver } from '../resolvers/fields-comp.service';
 
 export const dashboardRoutes: Routes = [
   {
@@ -39,6 +41,7 @@ export const dashboardRoutes: Routes = [
       {
         path: 'client',
         component: ClientComponent,
+        resolve: { fieldsData: FieldsCompResolver  },
         canActivate: [RoleGuard],
         data: { roles: ['basic'] }
       },
@@ -65,6 +68,13 @@ export const dashboardRoutes: Routes = [
       {
         path: 'field',
         component: FieldComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['basic'] }
+      },
+      {
+        path: 'fields',
+        component: FieldsComponent,
+        resolve: { fieldsData: FieldsCompResolver  },
         canActivate: [RoleGuard],
         data: { roles: ['basic'] }
       },

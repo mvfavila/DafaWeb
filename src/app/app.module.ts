@@ -20,6 +20,7 @@ import { RouterModule } from '@angular/router';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { ClientsCompResolver } from './resolvers/clients-comp.service';
 import { EventWarningsFieldsCompResolver } from './resolvers/event-warnings-fields-comp.service';
+import { FieldsCompResolver } from './resolvers/fields-comp.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,7 @@ import { EventWarningsFieldsCompResolver } from './resolvers/event-warnings-fiel
     HttpClientModule,
     DashboardModule
   ],
-  providers: [ClientsCompResolver, EventWarningsFieldsCompResolver],
+  providers: [ClientsCompResolver, EventWarningsFieldsCompResolver, FieldsCompResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

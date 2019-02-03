@@ -20,7 +20,6 @@ const API_URL = environment.apiUrl;
   providedIn: 'root'
 })
 export class ApiService {
-
   constructor(
     private http: HttpClient,
     private session: SessionService,
@@ -161,6 +160,16 @@ export class ApiService {
       }, options)
       .pipe(
         tap(_ => this.log(`Updated event warning`)),
+        catchError(this.handleError)
+      );
+  }
+
+  public getFields(): Observable<FieldItem[]> {
+    const options = this.getRequestOptions();
+    return this.http
+      .get<FieldItem[]>(API_URL + '/fields', options)
+      .pipe(
+        tap(_ => this.log(`Fetched all fields`)),
         catchError(this.handleError)
       );
   }
