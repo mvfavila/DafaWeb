@@ -50,6 +50,28 @@ export class ApiService {
       );
   }
 
+  public createClient(client: ClientItem): Observable<ClientItem> {
+    const options = this.getRequestOptions();
+    return this.http
+      .post<ClientItem>(API_URL + '/clients', {
+        'client': {
+          'firstName': client.firstName,
+          'lastName': client.lastName,
+          'company': client.company,
+          'address': client.address,
+          'city': client.city,
+          'state': client.state,
+          'postalCode': client.postalCode,
+          'email': client.email,
+          'active': client.active,
+        }
+      }, options)
+      .pipe(
+        tap(_ => this.log(`Created client`)),
+        catchError(this.handleError)
+      );
+  }
+
   public updateClient(client: ClientItem): Observable<ClientItem> {
     const options = this.getRequestOptions();
     return this.http

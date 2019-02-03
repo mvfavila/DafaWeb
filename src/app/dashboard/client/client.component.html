@@ -87,7 +87,7 @@
           </mat-form-field>
         </div>
       </div>
-      <div class="row">
+      <div class="row" *ngIf="data != null">
         <div class="col">
             <mat-slide-toggle (change)="onChange($event)" [checked]="clientForm.controls['active'].value">
               Active

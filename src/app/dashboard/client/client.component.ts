@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ClientItem } from 'src/app/models/client';
+import { ClientItem, Client } from 'src/app/models/client';
 import { DataTransferService } from '../data-transfer.service';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
@@ -30,6 +30,7 @@ export class ClientComponent implements OnInit {
   public showInputErrors = false;
   public hasFailed = false;
   public isBusy = false;
+  public data: any;
 
   states = [
     {name: 'Alagoas', abbreviation: 'AL'},
@@ -52,12 +53,12 @@ export class ClientComponent implements OnInit {
 
   ngOnInit() {
     // Grab client from data transfer service
-    const data = this.dataTransferService.getData();
-    if (data) {
+    this.data = this.dataTransferService.getData();
+    if (this.data) {
       // Fill form
-      this.clientForm.patchValue(data);
+      this.clientForm.patchValue(this.data);
       // Put client back in the data transfer service
-      this.dataTransferService.setData(data);
+      this.dataTransferService.setData(this.data);
     }
   }
 
@@ -79,27 +80,60 @@ export class ClientComponent implements OnInit {
     this.hasFailed = false;
 
     // Grab client from data transfer service
-    const client = this.dataTransferService.getData();
+    let client = this.dataTransferService.getData();
+    let newClient = false;
+    if (!client) {
+      client = new Client();
+      newClient = true;
+    }
 
     // Grab values from form
-    client.company = this.clientForm.value['company'];
     client.firstName = this.clientForm.value['firstName'];
     client.lastName = this.clientForm.value['lastName'];
-    client.email = this.clientForm.value['email'];
+    client.company = this.clientForm.value['company'];
     client.address = this.clientForm.value['address'];
     client.city = this.clientForm.value['city'];
     client.state = this.clientForm.value['state'];
     client.postalCode = this.clientForm.value['postalCode'];
+    client.email = this.clientForm.value['email'];
     client.active = this.clientForm.value['active'];
 
     // Submit request to API
+    if (newClient) {
+      this.createClient(client);
+    } else {
+      this.updateClient(client);
+    }
+  }
+
+  private createClient(client: ClientItem) {
+    this.api
+      .createClient(client)
+      .subscribe((clientItem: ClientItem) => {
+        this.isBusy = false;
+        this.hasFailed = false;
+
+        const snackBarRef = this.openSnackBar('Client created');
+        snackBarRef.afterDismissed().subscribe(() => {
+          this.router.navigate(['/dashboard']);
+        });
+      },
+      (error) => {
+        this.isBusy = false;
+        this.hasFailed = true;
+        this.openSnackBar('Fail');
+      }
+    );
+  }
+
+  private updateClient(client: ClientItem) {
     this.api
       .updateClient(client)
       .subscribe((clientItem: ClientItem) => {
         this.isBusy = false;
         this.hasFailed = false;
 
-        const snackBarRef = this.openSnackBar('Success');
+        const snackBarRef = this.openSnackBar('Client updated');
         snackBarRef.afterDismissed().subscribe(() => {
           this.router.navigate(['/dashboard']);
         });
