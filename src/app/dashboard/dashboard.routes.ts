@@ -9,6 +9,7 @@ import { ClientsComponent } from './clients/clients.component';
 import { ClientComponent } from './client/client.component';
 import { EventWarningsFieldsCompResolver } from '../resolvers/event-warnings-fields-comp.service';
 import { EventWarningsComponent } from './event-warnings/event-warnings.component';
+import { EventWarningComponent } from './event-warning/event-warning.component';
 
 export const dashboardRoutes: Routes = [
   {
@@ -51,6 +52,12 @@ export const dashboardRoutes: Routes = [
         path: 'eventWarnings',
         component: EventWarningsComponent,
         resolve: { eventWarningsData: EventWarningsFieldsCompResolver  },
+        canActivate: [RoleGuard],
+        data: { roles: ['basic'] }
+      },
+      {
+        path: 'eventWarning',
+        component: EventWarningComponent,
         canActivate: [RoleGuard],
         data: { roles: ['basic'] }
       },

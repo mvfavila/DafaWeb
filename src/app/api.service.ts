@@ -83,6 +83,20 @@ export class ApiService {
       );
   }
 
+  public updateEventWarningStatus(eventWarning: EventWarningFieldItem): Observable<EventWarningFieldItem> {
+    const options = this.getRequestOptions();
+    return this.http
+      .patch<EventWarningFieldItem>(`${API_URL}/eventWarningField/${eventWarning.idEventWarning}`, {
+        'eventWarning': {
+          'solved': eventWarning.solved
+        }
+      }, options)
+      .pipe(
+        tap(_ => this.log(`Updated event warning`)),
+        catchError(this.handleError)
+      );
+  }
+
   private handleError(error: HttpErrorResponse | any) {
     return throwError(error.message || error);
   }

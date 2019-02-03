@@ -16,7 +16,7 @@ export class EventWarningsComponent implements OnInit {
   dataSource: EventWarningsFieldsDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['nameEventType', 'date', 'nameField', 'company'];
+  displayedColumns = ['nameAlertType', 'date', 'nameField', 'company'];
 
   eventWarnings: EventWarningFieldItem[] = [];
 

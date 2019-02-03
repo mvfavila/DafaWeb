@@ -7,10 +7,10 @@
     aria-label="Elements"
   >
     <!-- Event Type Column -->
-    <ng-container matColumnDef="nameEventType">
+    <ng-container matColumnDef="nameAlertType">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
       <td mat-cell (click)="selectEventWarning(row)" *matCellDef="let row">
-        {{ row.nameEventType }}
+        {{ row.nameAlertType }}
       </td>
     </ng-container>
 

@@ -70,7 +70,7 @@ export class EventWarningsFieldsDataSource extends DataSource<EventWarningFieldI
         case 'date': return compare(a.date, b.date, isAsc);
         case 'solutionDate': return compare(a.solutionDate, b.solutionDate, isAsc);
         case 'solved': return compare(a.solved, b.solved, isAsc);
-        case 'nameEventType': return compare(a.nameEventType, b.nameEventType, isAsc);
+        case 'nameEvent': return compare(a.nameEvent, b.nameEvent, isAsc);
         case 'nameField': return compare(a.nameField, b.nameField, isAsc);
         case 'company': return compare(a.company, b.company, isAsc);
         default: return 0;

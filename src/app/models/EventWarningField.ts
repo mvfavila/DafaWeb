@@ -3,8 +3,8 @@ export class EventWarningField implements EventWarningFieldItem {
     date: Date = null;
     solutionDate: Date = null;
     solved: boolean = null;
-    nameEventType: string = null;
     idField: string = null;
+    nameEvent: string = null;
     nameField: string = null;
     clientId: string = null;
     company: string = null;
@@ -15,8 +15,8 @@ export class EventWarningFieldItem {
     date: Date;
     solutionDate: Date;
     solved: boolean;
-    nameEventType: string;
     idField: string;
+    nameEvent: string;
     nameField: string;
     clientId: string;
     company: string;

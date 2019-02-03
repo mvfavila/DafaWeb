@@ -18,6 +18,7 @@ import { ClientComponent } from './client/client.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DataTransferService } from './data-transfer.service';
 import { EventWarningsComponent } from './event-warnings/event-warnings.component';
+import { EventWarningComponent } from './event-warning/event-warning.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { EventWarningsComponent } from './event-warnings/event-warnings.componen
     ClientsComponent,
     ClientComponent,
     EventWarningsComponent,
+    EventWarningComponent,
   ],
   imports: [
     CommonModule,
