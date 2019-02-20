@@ -40,4 +40,9 @@ export class HomeComponent {
     this.dataTransferService.clearData();
     this.router.navigate(['/dashboard/client']);
   }
+
+  addNewWarning() {
+    this.dataTransferService.clearData();
+    this.router.navigate(['/dashboard/eventWarning']);
+  }
 }
