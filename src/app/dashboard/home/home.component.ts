@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { Router } from '@angular/router';
+import { DataTransferService } from '../data-transfer.service';
 
 @Component({
   selector: 'app-home',
@@ -29,5 +31,13 @@ export class HomeComponent {
     })
   );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver,
+    private router: Router,
+    private dataTransferService: DataTransferService,
+    ) {}
+
+  addNewClient() {
+    this.dataTransferService.clearData();
+    this.router.navigate(['/dashboard/client']);
+  }
 }
