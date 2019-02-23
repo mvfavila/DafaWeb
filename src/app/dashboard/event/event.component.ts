@@ -3,16 +3,16 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { DataTransferService } from '../data-transfer.service';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
-import { MatSnackBar } from '@angular/material';
-import { EventWarningFieldItem } from 'src/app/models/eventWarningField';
+import { MatSnackBar, MatDatepickerModule } from '@angular/material';
+import { EventFieldItem } from 'src/app/models/eventField';
 
 @Component({
-  selector: 'app-event-warning',
-  templateUrl: './event-warning.component.html',
-  styleUrls: ['./event-warning.component.scss']
+  selector: 'app-event',
+  templateUrl: './event.component.html',
+  styleUrls: ['./event.component.scss']
 })
-export class EventWarningComponent implements OnInit {
-  eventWarningForm = this.fb.group({
+export class EventComponent implements OnInit {
+  eventForm = this.fb.group({
     date: [null, Validators.required],
     solutionDate: [null],
     solved: [false],
@@ -32,7 +32,8 @@ export class EventWarningComponent implements OnInit {
     private dataTransferService: DataTransferService,
     private router: Router,
     private api: ApiService,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    public picker: MatDatepickerModule
   ) {}
 
   ngOnInit() {
@@ -40,7 +41,7 @@ export class EventWarningComponent implements OnInit {
     const data = this.dataTransferService.getData();
     if (data) {
       // Fill form
-      this.eventWarningForm.patchValue(data);
+      this.eventForm.patchValue(data);
       // Put client back in the data transfer service
       this.dataTransferService.setData(data);
     }
@@ -54,7 +55,7 @@ export class EventWarningComponent implements OnInit {
 
   onSubmit() {
     // Make sure form values are valid
-    if (this.eventWarningForm.invalid) {
+    if (this.eventForm.invalid) {
       this.showInputErrors = true;
       return;
     }
@@ -64,15 +65,15 @@ export class EventWarningComponent implements OnInit {
     this.hasFailed = false;
 
     // Grab client from data transfer service
-    const eventWarning = this.dataTransferService.getData();
+    const event = this.dataTransferService.getData();
 
     // Grab values from form
-    eventWarning.solved = this.eventWarningForm.value['solved'];
+    event.solved = this.eventForm.value['solved'];
 
     // Submit request to API
     this.api
-      .updateEventWarningStatus(eventWarning)
-      .subscribe((eventWarningFieldItem: EventWarningFieldItem) => {
+      .updateEventStatus(event)
+      .subscribe((eventFieldItem: EventFieldItem) => {
         this.isBusy = false;
         this.hasFailed = false;
 
@@ -91,9 +92,9 @@ export class EventWarningComponent implements OnInit {
 
   onChange(e: { checked: boolean; }) {
       if (e.checked === true) {
-        this.eventWarningForm.controls['solved'].setValue(true);
+        this.eventForm.controls['solved'].setValue(true);
       } else {
-        this.eventWarningForm.controls['solved'].setValue(false);
+        this.eventForm.controls['solved'].setValue(false);
       }
   }
 }

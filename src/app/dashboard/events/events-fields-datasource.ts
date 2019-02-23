@@ -2,20 +2,20 @@ import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator, MatSort } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
-import { EventWarningFieldItem } from 'src/app/models/eventWarningField';
+import { EventFieldItem } from 'src/app/models/eventField';
 
 /**
- * Data source for the EventWarningsFields view. This class should
+ * Data source for the EventFields view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class EventWarningsFieldsDataSource extends DataSource<EventWarningFieldItem> {
+export class EventFieldsDataSource extends DataSource<EventFieldItem> {
 
-  data: EventWarningFieldItem[] = [];
+  data: EventFieldItem[] = [];
 
-  constructor(private paginator: MatPaginator, private sort: MatSort, private eventWarningsFields: EventWarningFieldItem[]) {
+  constructor(private paginator: MatPaginator, private sort: MatSort, private eventsFields: EventFieldItem[]) {
     super();
-    this.data = eventWarningsFields;
+    this.data = eventsFields;
   }
 
   /**
@@ -23,7 +23,7 @@ export class EventWarningsFieldsDataSource extends DataSource<EventWarningFieldI
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<EventWarningFieldItem[]> {
+  connect(): Observable<EventFieldItem[]> {
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
     const dataMutations = [
@@ -50,7 +50,7 @@ export class EventWarningsFieldsDataSource extends DataSource<EventWarningFieldI
    * Paginate the data (client-side). If you're using server-side pagination,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getPagedData(data: EventWarningFieldItem[]) {
+  private getPagedData(data: EventFieldItem[]) {
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
     return data.splice(startIndex, this.paginator.pageSize);
   }
@@ -59,7 +59,7 @@ export class EventWarningsFieldsDataSource extends DataSource<EventWarningFieldI
    * Sort the data (client-side). If you're using server-side sorting,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getSortedData(data: EventWarningFieldItem[]) {
+  private getSortedData(data: EventFieldItem[]) {
     if (!this.sort.active || this.sort.direction === '') {
       return data;
     }

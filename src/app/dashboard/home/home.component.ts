@@ -43,6 +43,6 @@ export class HomeComponent {
 
   addNewWarning() {
     this.dataTransferService.clearData();
-    this.router.navigate(['/dashboard/eventWarning']);
+    this.router.navigate(['/dashboard/event']);
   }
 }

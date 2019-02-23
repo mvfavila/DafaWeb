@@ -1,5 +1,5 @@
-export class EventWarningField implements EventWarningFieldItem {
-    idEventWarning: string = null;
+export class EventField implements EventFieldItem {
+    idEvent: string = null;
     date: Date = null;
     solutionDate: Date = null;
     solved: boolean = null;
@@ -10,8 +10,8 @@ export class EventWarningField implements EventWarningFieldItem {
     company: string = null;
 }
 
-export class EventWarningFieldItem {
-    idEventWarning: string;
+export class EventFieldItem {
+    idEvent: string;
     date: Date;
     solutionDate: Date;
     solved: boolean;

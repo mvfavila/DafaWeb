@@ -9,15 +9,15 @@ import {
   MatSelectModule,
 } from '@angular/material';
 
-import { EventWarningComponent } from './event-warning.component';
+import { EventComponent } from './event.component';
 
-describe('EventWarningComponent', () => {
-  let component: EventWarningComponent;
-  let fixture: ComponentFixture<EventWarningComponent>;
+describe('EventComponent', () => {
+  let component: EventComponent;
+  let fixture: ComponentFixture<EventComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EventWarningComponent ],
+      declarations: [ EventComponent ],
       imports: [
         NoopAnimationsModule,
         ReactiveFormsModule,
@@ -31,7 +31,7 @@ describe('EventWarningComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EventWarningComponent);
+    fixture = TestBed.createComponent(EventComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

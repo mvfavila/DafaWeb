@@ -11,7 +11,7 @@ import { SessionService } from './session.service';
 import { MessageService } from './message.service';
 import { Token } from './token';
 import { ClientItem } from './models/client';
-import { EventWarningFieldItem } from './models/eventWarningField';
+import { EventFieldItem } from './models/eventField';
 import { FieldItem } from './models/field';
 
 const API_URL = environment.apiUrl;
@@ -140,22 +140,22 @@ export class ApiService {
       );
   }
 
-  public getEventWarningsFields(): Observable<EventWarningFieldItem[]> {
+  public getEventFields(): Observable<EventFieldItem[]> {
     const options = this.getRequestOptions();
     return this.http
-      .get<EventWarningFieldItem[]>(API_URL + '/eventWarningsFields', options)
+      .get<EventFieldItem[]>(API_URL + '/eventsFields', options)
       .pipe(
-        tap(_ => this.log(`Fetched all event warnings from fields`)),
+        tap(_ => this.log(`Fetched all events from fields`)),
         catchError(this.handleError)
       );
   }
 
-  public updateEventWarningStatus(eventWarning: EventWarningFieldItem): Observable<EventWarningFieldItem> {
+  public updateEventStatus(event: EventFieldItem): Observable<EventFieldItem> {
     const options = this.getRequestOptions();
     return this.http
-      .patch<EventWarningFieldItem>(`${API_URL}/eventWarningField/${eventWarning.idEventWarning}`, {
-        'eventWarning': {
-          'solved': eventWarning.solved
+      .patch<EventFieldItem>(`${API_URL}/eventField/${event.idEvent}`, {
+        'event': {
+          'solved': event.solved
         }
       }, options)
       .pipe(

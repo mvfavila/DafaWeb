@@ -9,7 +9,7 @@
     <!-- Event Type Column -->
     <ng-container matColumnDef="nameAlertType">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-      <td mat-cell (click)="selectEventWarning(row)" *matCellDef="let row">
+      <td mat-cell (click)="selectEvent(row)" *matCellDef="let row">
         {{ row.nameAlertType }}
       </td>
     </ng-container>
@@ -17,7 +17,7 @@
     <!-- Date Column -->
     <ng-container matColumnDef="date">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
-      <td mat-cell (click)="selectEventWarning(row)" *matCellDef="let row">
+      <td mat-cell (click)="selectEvent(row)" *matCellDef="let row">
         {{ row.date | date }}
       </td>
     </ng-container>
@@ -25,7 +25,7 @@
     <!-- Field Column -->
     <ng-container matColumnDef="nameField">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Field</th>
-      <td mat-cell (click)="selectEventWarning(row)" *matCellDef="let row">
+      <td mat-cell (click)="selectEvent(row)" *matCellDef="let row">
         {{ row.nameField }}
       </td>
     </ng-container>
@@ -33,7 +33,7 @@
     <!-- Company Column -->
     <ng-container matColumnDef="company">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Company</th>
-      <td mat-cell (click)="selectEventWarning(row)" *matCellDef="let row">
+      <td mat-cell (click)="selectEvent(row)" *matCellDef="let row">
         {{ row.company }}
       </td>
     </ng-container>

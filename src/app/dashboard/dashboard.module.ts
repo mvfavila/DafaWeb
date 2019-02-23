@@ -10,15 +10,15 @@ import { HomeComponent } from './home/home.component';
 import {
   MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule,
   MatTableModule, MatPaginatorModule, MatSortModule, MatInputModule, MatSelectModule,
-  MatRadioModule, MatSlideToggleModule, MatSnackBarModule
+  MatRadioModule, MatSlideToggleModule, MatSnackBarModule, MatDatepickerModule
 } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import { ClientsComponent } from './clients/clients.component';
 import { ClientComponent } from './client/client.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DataTransferService } from './data-transfer.service';
-import { EventWarningsComponent } from './event-warnings/event-warnings.component';
-import { EventWarningComponent } from './event-warning/event-warning.component';
+import { EventsComponent } from './events/events.component';
+import { EventComponent } from './event/event.component';
 import { FieldComponent } from './field/field.component';
 import { FieldsComponent } from './fields/fields.component';
 
@@ -29,8 +29,8 @@ import { FieldsComponent } from './fields/fields.component';
     HomeComponent,
     ClientsComponent,
     ClientComponent,
-    EventWarningsComponent,
-    EventWarningComponent,
+    EventsComponent,
+    EventComponent,
     FieldComponent,
     FieldsComponent,
   ],
@@ -51,6 +51,7 @@ import { FieldsComponent } from './fields/fields.component';
     MatRadioModule,
     MatSlideToggleModule,
     MatSnackBarModule,
+    MatDatepickerModule,
     ReactiveFormsModule
   ],
   providers: [
