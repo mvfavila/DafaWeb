@@ -27,7 +27,7 @@ export class EventComponent implements OnInit {
   public isBusy = false;
   public data: any;
 
-  states = [];
+  alertTypes = [];
 
   constructor(private fb: FormBuilder,
     private dataTransferService: DataTransferService,
@@ -35,7 +35,9 @@ export class EventComponent implements OnInit {
     private api: ApiService,
     public snackBar: MatSnackBar,
     public picker: MatDatepickerModule
-  ) {}
+  ) {
+    this.loadAlertTypes();
+  }
 
   ngOnInit() {
     // Grab client from data transfer service
@@ -46,6 +48,18 @@ export class EventComponent implements OnInit {
       // Put client back in the data transfer service
       this.dataTransferService.setData(this.data);
     }
+  }
+
+  private async loadAlertTypes() {
+    await this.api.getAlertTypes()
+    .subscribe((result) => {
+      this.alertTypes = result;
+    },
+    (error) => {
+      this.isBusy = false;
+      this.hasFailed = true;
+      this.openSnackBar('Fail');
+    });
   }
 
   openSnackBar(message: string) {

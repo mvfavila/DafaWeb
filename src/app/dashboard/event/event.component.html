@@ -12,15 +12,13 @@
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
         </div>
-      </div>
-      <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input
-              matInput
-              placeholder="Alert Type"
-              formControlName="alertType"
-            />
+            <mat-select placeholder="Alert Type" formControlName="alertType">
+              <mat-option *ngFor="let alertTp of alertTypes" [value]="alertTp.id">
+                {{ alertTp.name }}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
         </div>
       </div>

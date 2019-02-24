@@ -6,7 +6,7 @@ import {
   HttpErrorResponse,
   HttpHeaders
 } from '@angular/common/http';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, tap, map } from 'rxjs/operators';
 import { SessionService } from './session.service';
 import { MessageService } from './message.service';
 import { Token } from './token';
@@ -14,6 +14,7 @@ import { ClientItem } from './models/client';
 import { EventFieldItem } from './models/eventField';
 import { FieldItem } from './models/field';
 import { EventItem } from './models/event';
+import { AlertTypeItem } from './models/alertType';
 
 const API_URL = environment.apiUrl;
 
@@ -157,6 +158,17 @@ export class ApiService {
       .get<EventFieldItem[]>(API_URL + '/eventsFields', options)
       .pipe(
         tap(_ => this.log(`Fetched all event fields from fields`)),
+        catchError(this.handleError)
+      );
+  }
+
+  public getAlertTypes(): Observable<AlertTypeItem[]> {
+    const options = this.getRequestOptions();
+    return this.http
+      .get<any>(API_URL + '/alertTypes', options)
+      .pipe(
+        map(result => result.alertTypes),
+        tap(_ => this.log(`Fetched all alert types`)),
         catchError(this.handleError)
       );
   }
