@@ -16,7 +16,7 @@ export class EventComponent implements OnInit {
     date: [null, Validators.required],
     solutionDate: [null],
     solved: [false],
-    nameAlertType: [null, Validators.required],
+    alertType: [null, Validators.required],
     nameField: [null, Validators.required],
     company: [null, Validators.required]
   });
@@ -25,6 +25,7 @@ export class EventComponent implements OnInit {
   public showInputErrors = false;
   public hasFailed = false;
   public isBusy = false;
+  public data: any;
 
   states = [];
 
@@ -38,12 +39,12 @@ export class EventComponent implements OnInit {
 
   ngOnInit() {
     // Grab client from data transfer service
-    const data = this.dataTransferService.getData();
-    if (data) {
+    this.data = this.dataTransferService.getData();
+    if (this.data) {
       // Fill form
-      this.eventForm.patchValue(data);
+      this.eventForm.patchValue(this.data);
       // Put client back in the data transfer service
-      this.dataTransferService.setData(data);
+      this.dataTransferService.setData(this.data);
     }
   }
 

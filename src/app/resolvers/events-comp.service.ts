@@ -4,15 +4,15 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ApiService } from '../api.service';
-import { EventFieldItem } from '../models/eventField';
+import { EventItem } from '../models/event';
 
 @Injectable()
-export class EventFieldsCompResolver implements Resolve<EventFieldItem[]> {
+export class EventsCompResolver implements Resolve<EventItem[]> {
 
   constructor(private api: ApiService) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<EventFieldItem[]> {
-    return this.api.getEventFields()
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<EventItem[]> {
+    return this.api.getEvents()
     .pipe(
       map((result) => {
         return result;

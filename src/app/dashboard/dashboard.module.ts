@@ -10,7 +10,7 @@ import { HomeComponent } from './home/home.component';
 import {
   MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule,
   MatTableModule, MatPaginatorModule, MatSortModule, MatInputModule, MatSelectModule,
-  MatRadioModule, MatSlideToggleModule, MatSnackBarModule, MatDatepickerModule
+  MatRadioModule, MatSlideToggleModule, MatSnackBarModule, MatDatepickerModule, MatNativeDateModule
 } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import { ClientsComponent } from './clients/clients.component';
@@ -52,6 +52,7 @@ import { FieldsComponent } from './fields/fields.component';
     MatSlideToggleModule,
     MatSnackBarModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     ReactiveFormsModule
   ],
   providers: [

@@ -2,20 +2,20 @@ import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator, MatSort } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
-import { EventFieldItem } from 'src/app/models/eventField';
+import { EventItem } from 'src/app/models/event';
 
 /**
- * Data source for the EventFields view. This class should
+ * Data source for the Event view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class EventFieldsDataSource extends DataSource<EventFieldItem> {
+export class EventsDataSource extends DataSource<EventItem> {
 
-  data: EventFieldItem[] = [];
+  data: EventItem[] = [];
 
-  constructor(private paginator: MatPaginator, private sort: MatSort, private eventsFields: EventFieldItem[]) {
+  constructor(private paginator: MatPaginator, private sort: MatSort, private events: EventItem[]) {
     super();
-    this.data = eventsFields;
+    this.data = events;
   }
 
   /**
@@ -23,7 +23,7 @@ export class EventFieldsDataSource extends DataSource<EventFieldItem> {
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<EventFieldItem[]> {
+  connect(): Observable<EventItem[]> {
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
     const dataMutations = [
@@ -50,7 +50,7 @@ export class EventFieldsDataSource extends DataSource<EventFieldItem> {
    * Paginate the data (client-side). If you're using server-side pagination,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getPagedData(data: EventFieldItem[]) {
+  private getPagedData(data: EventItem[]) {
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
     return data.splice(startIndex, this.paginator.pageSize);
   }
@@ -59,7 +59,7 @@ export class EventFieldsDataSource extends DataSource<EventFieldItem> {
    * Sort the data (client-side). If you're using server-side sorting,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getSortedData(data: EventFieldItem[]) {
+  private getSortedData(data: EventItem[]) {
     if (!this.sort.active || this.sort.direction === '') {
       return data;
     }
@@ -68,11 +68,7 @@ export class EventFieldsDataSource extends DataSource<EventFieldItem> {
       const isAsc = this.sort.direction === 'asc';
       switch (this.sort.active) {
         case 'date': return compare(a.date, b.date, isAsc);
-        case 'solutionDate': return compare(a.solutionDate, b.solutionDate, isAsc);
-        case 'solved': return compare(a.solved, b.solved, isAsc);
-        case 'nameEvent': return compare(a.nameEvent, b.nameEvent, isAsc);
-        case 'nameField': return compare(a.nameField, b.nameField, isAsc);
-        case 'company': return compare(a.company, b.company, isAsc);
+        case 'eventType': return compare(a.eventType, b.eventType, isAsc);
         default: return 0;
       }
     });

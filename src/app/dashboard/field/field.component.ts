@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { MatSnackBar } from '@angular/material';
 import { Field, FieldItem } from 'src/app/models/field';
+import { Event } from 'src/app/models/event';
 
 @Component({
   selector: 'app-field',
@@ -81,10 +82,10 @@ export class FieldComponent implements OnInit {
 
     // Grab field from data transfer service
     let field = this.dataTransferService.getData();
-    let newField = false;
+    let newEvent = false;
     if (!field.id) {
       field = new Field();
-      newField = true;
+      newEvent = true;
     }
 
     // Grab values from form
@@ -99,7 +100,7 @@ export class FieldComponent implements OnInit {
     field.client = this.data.client;
 
     // Submit request to API
-    if (newField) {
+    if (newEvent) {
       this.createField(field);
     } else {
       this.updateField(field);
@@ -146,11 +147,25 @@ export class FieldComponent implements OnInit {
     );
   }
 
-  onChange(e: { checked: boolean; }) {
+  public onChange(e: { checked: boolean; }) {
       if (e.checked === true) {
         this.fieldForm.controls['active'].setValue(true);
       } else {
         this.fieldForm.controls['active'].setValue(false);
       }
+  }
+
+  public addEvent() {
+    // Grab field from data transfer service
+    this.data = this.dataTransferService.getData();
+
+    const newEvent = new Event();
+    newEvent.field = this.data._id;
+
+    // Put newEvent (with fieldId) in the data transfer service
+    this.dataTransferService.setData(newEvent);
+
+    // redirect to event component
+    this.router.navigate(['/dashboard/event']);
   }
 }

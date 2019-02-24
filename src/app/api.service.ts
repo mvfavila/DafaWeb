@@ -13,6 +13,7 @@ import { Token } from './token';
 import { ClientItem } from './models/client';
 import { EventFieldItem } from './models/eventField';
 import { FieldItem } from './models/field';
+import { EventItem } from './models/event';
 
 const API_URL = environment.apiUrl;
 
@@ -140,12 +141,22 @@ export class ApiService {
       );
   }
 
+  public getEvents(): Observable<EventItem[]> {
+    const options = this.getRequestOptions();
+    return this.http
+      .get<EventItem[]>(API_URL + '/events', options)
+      .pipe(
+        tap(_ => this.log(`Fetched all events from fields`)),
+        catchError(this.handleError)
+      );
+  }
+
   public getEventFields(): Observable<EventFieldItem[]> {
     const options = this.getRequestOptions();
     return this.http
       .get<EventFieldItem[]>(API_URL + '/eventsFields', options)
       .pipe(
-        tap(_ => this.log(`Fetched all events from fields`)),
+        tap(_ => this.log(`Fetched all event fields from fields`)),
         catchError(this.handleError)
       );
   }

@@ -7,7 +7,7 @@ import { ClientsCompResolver } from '../resolvers/clients-comp.service';
 import { HomeComponent } from './home/home.component';
 import { ClientsComponent } from './clients/clients.component';
 import { ClientComponent } from './client/client.component';
-import { EventFieldsCompResolver } from '../resolvers/events-fields-comp.service';
+import { EventsCompResolver } from '../resolvers/events-comp.service';
 import { EventsComponent } from './events/events.component';
 import { EventComponent } from './event/event.component';
 import { FieldComponent } from './field/field.component';
@@ -28,7 +28,7 @@ export const dashboardRoutes: Routes = [
       {
         path: 'home',
         component: HomeComponent,
-        resolve: { clientsData: ClientsCompResolver, eventsData: EventFieldsCompResolver },
+        resolve: { clientsData: ClientsCompResolver, eventsData: EventsCompResolver },
         canActivate: [RoleGuard],
         data: { roles: ['basic'] }
       },
@@ -55,7 +55,7 @@ export const dashboardRoutes: Routes = [
       {
         path: 'events',
         component: EventsComponent,
-        resolve: { eventsData: EventFieldsCompResolver  },
+        resolve: { eventsData: EventsCompResolver  },
         canActivate: [RoleGuard],
         data: { roles: ['basic'] }
       },
@@ -68,6 +68,7 @@ export const dashboardRoutes: Routes = [
       {
         path: 'field',
         component: FieldComponent,
+        resolve: { eventsData: EventsCompResolver },
         canActivate: [RoleGuard],
         data: { roles: ['basic'] }
       },

@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataTransferService } from '../data-transfer.service';
-import { EventFieldItem } from 'src/app/models/eventField';
-import { EventFieldsDataSource } from './events-fields-datasource';
+import { EventsDataSource } from './events-datasource';
+import { EventItem } from 'src/app/models/event';
 
 @Component({
   selector: 'app-events',
@@ -13,12 +13,12 @@ import { EventFieldsDataSource } from './events-fields-datasource';
 export class EventsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  dataSource: EventFieldsDataSource;
+  dataSource: EventsDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['nameAlertType', 'date', 'nameField', 'company'];
 
-  events: EventFieldItem[] = [];
+  events: EventItem[] = [];
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -26,10 +26,10 @@ export class EventsComponent implements OnInit {
 
   ngOnInit() {
     this.events = this.route.snapshot.data.eventsData.events || [];
-    this.dataSource = new EventFieldsDataSource(this.paginator, this.sort, this.events);
+    this.dataSource = new EventsDataSource(this.paginator, this.sort, this.events);
   }
 
-  public selectEvent(event: EventFieldItem) {
+  public selectEvent(event: EventItem) {
     this.dataTransferService.setData(event);
     this.router.navigate(['/dashboard/event']);
   }
