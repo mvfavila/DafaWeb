@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { MatSnackBar } from '@angular/material';
 import { Field, FieldItem } from 'src/app/models/field';
-import { Event } from 'src/app/models/event';
+import { EventItem } from 'src/app/models/event';
 
 @Component({
   selector: 'app-field',
@@ -159,10 +159,10 @@ export class FieldComponent implements OnInit {
     // Grab field from data transfer service
     this.data = this.dataTransferService.getData();
 
-    const newEvent = new Event();
+    const newEvent = new EventItem();
     newEvent.field = this.data._id;
 
-    // Put newEvent (with fieldId) in the data transfer service
+    // Put newEvent (with field) in the data transfer service
     this.dataTransferService.setData(newEvent);
 
     // redirect to event component

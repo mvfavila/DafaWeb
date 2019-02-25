@@ -11,10 +11,11 @@ import { SessionService } from './session.service';
 import { MessageService } from './message.service';
 import { Token } from './token';
 import { ClientItem } from './models/client';
-import { EventFieldItem } from './models/eventField';
 import { FieldItem } from './models/field';
 import { EventItem } from './models/event';
 import { AlertTypeItem } from './models/alertType';
+import { EventWarningItem } from './models/eventWarning';
+import { EventTypeItem } from './models/eventType';
 
 const API_URL = environment.apiUrl;
 
@@ -147,17 +148,35 @@ export class ApiService {
     return this.http
       .get<EventItem[]>(API_URL + '/events', options)
       .pipe(
-        tap(_ => this.log(`Fetched all events from fields`)),
+        tap(_ => this.log(`Fetched all events`)),
         catchError(this.handleError)
       );
   }
 
-  public getEventFields(): Observable<EventFieldItem[]> {
+  public createEvent(event: EventItem): Observable<EventItem> {
     const options = this.getRequestOptions();
     return this.http
-      .get<EventFieldItem[]>(API_URL + '/eventsFields', options)
+      .post<EventItem>(API_URL + '/events', {
+        'event': {
+          'date': event.date,
+          'eventType': event.eventType,
+          'field': event.field,
+          'active': event.active,
+        }
+      }, options)
       .pipe(
-        tap(_ => this.log(`Fetched all event fields from fields`)),
+        tap(_ => this.log(`Created event`)),
+        catchError(this.handleError)
+      );
+  }
+
+  public getEventTypes(): Observable<EventTypeItem[]> {
+    const options = this.getRequestOptions();
+    return this.http
+      .get<any>(API_URL + '/eventTypes', options)
+      .pipe(
+        map(result => result.eventTypes),
+        tap(_ => this.log(`Fetched all event types`)),
         catchError(this.handleError)
       );
   }
@@ -173,11 +192,11 @@ export class ApiService {
       );
   }
 
-  public updateEventStatus(event: EventFieldItem): Observable<EventFieldItem> {
+  public updateEventStatus(event: EventWarningItem): Observable<EventWarningItem> {
     const options = this.getRequestOptions();
     return this.http
-      .patch<EventFieldItem>(`${API_URL}/eventField/${event.idEvent}`, {
-        'event': {
+      .patch<EventWarningItem>(`${API_URL}/eventWarnings/${event.id}`, {
+        'eventWarning': {
           'solved': event.solved
         }
       }, options)

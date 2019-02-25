@@ -1,22 +1,22 @@
 <form [formGroup]="eventForm" novalidate (ngSubmit)="onSubmit()">
   <mat-card class="shipping-card">
     <mat-card-header>
-      <mat-card-title>Client</mat-card-title>
+      <mat-card-title>Event</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div class="row">
         <div class="col">
           <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+            <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="date">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
         </div>
         <div class="col">
           <mat-form-field class="full-width">
-            <mat-select placeholder="Alert Type" formControlName="alertType">
-              <mat-option *ngFor="let alertTp of alertTypes" [value]="alertTp.id">
-                {{ alertTp.name }}
+            <mat-select placeholder="Choose an Event Type" formControlName="eventType">
+              <mat-option *ngFor="let eventType of eventTypes" [value]="eventType._id">
+                {{ eventType.name }}
               </mat-option>
             </mat-select>
           </mat-form-field>

@@ -4,7 +4,7 @@ import { DataTransferService } from '../data-transfer.service';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { MatSnackBar, MatDatepickerModule } from '@angular/material';
-import { EventFieldItem } from 'src/app/models/eventField';
+import { EventItem } from 'src/app/models/event';
 
 @Component({
   selector: 'app-event',
@@ -14,11 +14,8 @@ import { EventFieldItem } from 'src/app/models/eventField';
 export class EventComponent implements OnInit {
   eventForm = this.fb.group({
     date: [null, Validators.required],
-    solutionDate: [null],
-    solved: [false],
-    alertType: [null, Validators.required],
-    nameField: [null, Validators.required],
-    company: [null, Validators.required]
+    eventType: [null, Validators.required],
+    field: [null, Validators.required]
   });
 
   public hasUnitNumber = false;
@@ -27,7 +24,7 @@ export class EventComponent implements OnInit {
   public isBusy = false;
   public data: any;
 
-  alertTypes = [];
+  eventTypes = [];
 
   constructor(private fb: FormBuilder,
     private dataTransferService: DataTransferService,
@@ -36,7 +33,7 @@ export class EventComponent implements OnInit {
     public snackBar: MatSnackBar,
     public picker: MatDatepickerModule
   ) {
-    this.loadAlertTypes();
+    this.loadEventTypes();
   }
 
   ngOnInit() {
@@ -50,10 +47,10 @@ export class EventComponent implements OnInit {
     }
   }
 
-  private async loadAlertTypes() {
-    await this.api.getAlertTypes()
+  private async loadEventTypes() {
+    await this.api.getEventTypes()
     .subscribe((result) => {
-      this.alertTypes = result;
+      this.eventTypes = result;
     },
     (error) => {
       this.isBusy = false;
@@ -79,16 +76,17 @@ export class EventComponent implements OnInit {
     this.isBusy = true;
     this.hasFailed = false;
 
-    // Grab client from data transfer service
+    // Grab event from data transfer service
     const event = this.dataTransferService.getData();
 
     // Grab values from form
-    event.solved = this.eventForm.value['solved'];
+    event.date = this.eventForm.value['date'];
+    event.eventType = this.eventForm.value['eventType'];
 
     // Submit request to API
     this.api
-      .updateEventStatus(event)
-      .subscribe((eventFieldItem: EventFieldItem) => {
+      .createEvent(event)
+      .subscribe((eventItem: EventItem) => {
         this.isBusy = false;
         this.hasFailed = false;
 
@@ -103,13 +101,5 @@ export class EventComponent implements OnInit {
         this.openSnackBar('Fail');
       }
     );
-  }
-
-  onChange(e: { checked: boolean; }) {
-      if (e.checked === true) {
-        this.eventForm.controls['solved'].setValue(true);
-      } else {
-        this.eventForm.controls['solved'].setValue(false);
-      }
   }
 }
