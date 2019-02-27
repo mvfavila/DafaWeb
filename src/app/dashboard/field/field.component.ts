@@ -83,7 +83,7 @@ export class FieldComponent implements OnInit {
     // Grab field from data transfer service
     let field = this.dataTransferService.getData();
     let newEvent = false;
-    if (!field.id) {
+    if (!field._id) {
       field = new Field();
       newEvent = true;
     }

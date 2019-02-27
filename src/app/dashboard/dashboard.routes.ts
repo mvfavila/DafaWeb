@@ -28,7 +28,7 @@ export const dashboardRoutes: Routes = [
       {
         path: 'home',
         component: HomeComponent,
-        resolve: { clientsData: ClientsCompResolver, eventsData: EventsCompResolver },
+        resolve: { clientsData: ClientsCompResolver },
         canActivate: [RoleGuard],
         data: { roles: ['basic'] }
       },
@@ -66,7 +66,7 @@ export const dashboardRoutes: Routes = [
         data: { roles: ['basic'] }
       },
       {
-        path: 'field',
+        path: 'field/:id',
         component: FieldComponent,
         resolve: { eventsData: EventsCompResolver },
         canActivate: [RoleGuard],

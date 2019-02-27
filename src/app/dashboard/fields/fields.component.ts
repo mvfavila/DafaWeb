@@ -32,6 +32,6 @@ export class FieldsComponent implements OnInit {
 
   public selectField(field: FieldItem) {
     this.dataTransferService.setData(field);
-    this.router.navigate(['/dashboard/field']);
+    this.router.navigate([`/dashboard/field/${field._id}`]);
   }
 }

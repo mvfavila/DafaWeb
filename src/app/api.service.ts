@@ -125,7 +125,7 @@ export class ApiService {
     return this.http
       .put<FieldItem>(API_URL + '/fields', {
         'field': {
-          'id': field.id,
+          'id': field._id,
           'name': field.name,
           'description': field.description,
           'email': field.email,
@@ -149,6 +149,16 @@ export class ApiService {
       .get<EventItem[]>(API_URL + '/events', options)
       .pipe(
         tap(_ => this.log(`Fetched all events`)),
+        catchError(this.handleError)
+      );
+  }
+
+  public getEventsByField(fieldId: string): Observable<EventItem[]> {
+    const options = this.getRequestOptions();
+    return this.http
+      .get<EventItem[]>(API_URL + `/events?field=${fieldId}`, options)
+      .pipe(
+        tap(_ => this.log(`Fetched all field events`)),
         catchError(this.handleError)
       );
   }

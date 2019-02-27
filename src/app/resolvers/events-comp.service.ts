@@ -12,13 +12,24 @@ export class EventsCompResolver implements Resolve<EventItem[]> {
   constructor(private api: ApiService) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<EventItem[]> {
-    return this.api.getEvents()
-    .pipe(
-      map((result) => {
-        return result;
-      }),
-      catchError(this.handleError)
-    );
+    const fieldId = route.paramMap.get('id');
+    if (fieldId) {
+      return this.api.getEventsByField(fieldId)
+      .pipe(
+        map((result) => {
+          return result;
+        }),
+        catchError(this.handleError)
+      );
+    } else {
+      return this.api.getEvents()
+      .pipe(
+        map((result) => {
+          return result;
+        }),
+        catchError(this.handleError)
+      );
+    }
   }
 
   private handleError(error: HttpErrorResponse | any) {

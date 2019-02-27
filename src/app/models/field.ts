@@ -1,5 +1,5 @@
 export class Field implements FieldItem {
-    id: string = null;
+    _id: string = null;
     name: string = null;
     description: string = null;
     email: string = null;
@@ -14,7 +14,7 @@ export class Field implements FieldItem {
 }
 
 export class FieldItem {
-    id: string;
+    _id: string;
     name: string;
     description: string;
     email: string;
