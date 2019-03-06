@@ -12,13 +12,24 @@ export class FieldsCompResolver implements Resolve<FieldItem[]> {
   constructor(private api: ApiService) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<FieldItem[]> {
-    return this.api.getFields()
-    .pipe(
-      map((result) => {
-        return result;
-      }),
-      catchError(this.handleError)
-    );
+    const clientId = route.paramMap.get('id');
+    if (clientId) {
+      return this.api.getFieldsByClient(clientId)
+      .pipe(
+        map((result) => {
+          return result;
+        }),
+        catchError(this.handleError)
+      );
+    } else {
+      return this.api.getFields()
+      .pipe(
+        map((result) => {
+          return result;
+        }),
+        catchError(this.handleError)
+      );
+    }
   }
 
   private handleError(error: HttpErrorResponse | any) {

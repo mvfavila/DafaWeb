@@ -39,7 +39,7 @@ export const dashboardRoutes: Routes = [
         data: { roles: ['basic'] }
       },
       {
-        path: 'client',
+        path: 'client/:id',
         component: ClientComponent,
         resolve: { fieldsData: FieldsCompResolver  },
         canActivate: [RoleGuard],

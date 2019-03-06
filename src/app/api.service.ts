@@ -98,6 +98,16 @@ export class ApiService {
       );
   }
 
+  public getFieldsByClient(clientId: string): Observable<FieldItem[]> {
+    const options = this.getRequestOptions();
+    return this.http
+      .get<FieldItem[]>(API_URL + `/clients/${clientId}/fields`, options)
+      .pipe(
+        tap(_ => this.log(`Fetched all client's fields`)),
+        catchError(this.handleError)
+      );
+  }
+
   public createField(field: FieldItem): Observable<FieldItem> {
     const options = this.getRequestOptions();
     return this.http
@@ -158,7 +168,7 @@ export class ApiService {
     return this.http
       .get<EventItem[]>(API_URL + `/fields/${fieldId}/events`, options)
       .pipe(
-        tap(_ => this.log(`Fetched all field events`)),
+        tap(_ => this.log(`Fetched all field's events`)),
         catchError(this.handleError)
       );
   }

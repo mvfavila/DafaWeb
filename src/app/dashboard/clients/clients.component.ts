@@ -32,6 +32,6 @@ export class ClientsComponent implements OnInit {
 
   public selectClient(client: ClientItem) {
     this.dataTransferService.setData(client);
-    this.router.navigate(['/dashboard/client']);
+    this.router.navigate([`/dashboard/client/${client._id}`]);
   }
 }
