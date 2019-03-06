@@ -7,16 +7,18 @@
         <td mat-cell (click)="selectField(row)" *matCellDef="let row">{{row.name}}</td>
       </ng-container>
   
-      <!-- Description Column -->
-      <ng-container matColumnDef="description">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
-        <td mat-cell (click)="selectField(row)" *matCellDef="let row">{{row.description}}</td>
-      </ng-container>
-  
       <!-- e-mail Column -->
       <ng-container matColumnDef="email">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>e-mail</th>
         <td mat-cell (click)="selectField(row)" *matCellDef="let row">{{row.email}}</td>
+      </ng-container>
+  
+      <!-- Last Updated Column -->
+      <ng-container matColumnDef="lastUpdate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Last updated</th>
+        <td mat-cell (click)="selectField(row)" *matCellDef="let row">
+          {{row.updatedAt | date}}
+        </td>
       </ng-container>
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

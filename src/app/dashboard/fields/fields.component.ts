@@ -16,7 +16,7 @@ export class FieldsComponent implements OnInit {
   dataSource: FieldsDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['name', 'description', 'email'];
+  displayedColumns = ['name', 'email', 'lastUpdate'];
 
   fields: FieldItem[] = [];
 
