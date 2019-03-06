@@ -39,6 +39,12 @@ export const dashboardRoutes: Routes = [
         data: { roles: ['basic'] }
       },
       {
+        path: 'client',
+        component: ClientComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['basic'] }
+      },
+      {
         path: 'client/:id',
         component: ClientComponent,
         resolve: { fieldsData: FieldsCompResolver  },
@@ -62,6 +68,12 @@ export const dashboardRoutes: Routes = [
       {
         path: 'event',
         component: EventComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['basic'] }
+      },
+      {
+        path: 'field',
+        component: FieldComponent,
         canActivate: [RoleGuard],
         data: { roles: ['basic'] }
       },
