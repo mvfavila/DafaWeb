@@ -16,7 +16,7 @@ export class EventsComponent implements OnInit {
   dataSource: EventsDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['nameAlertType', 'date', 'nameField', 'company'];
+  displayedColumns = ['eventTypeName', 'date', 'description'];
 
   events: EventItem[] = [];
 
