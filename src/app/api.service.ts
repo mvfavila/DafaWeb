@@ -156,7 +156,7 @@ export class ApiService {
   public getEventsByField(fieldId: string): Observable<EventItem[]> {
     const options = this.getRequestOptions();
     return this.http
-      .get<EventItem[]>(API_URL + `/events/${fieldId}`, options)
+      .get<EventItem[]>(API_URL + `/fields/${fieldId}/events`, options)
       .pipe(
         tap(_ => this.log(`Fetched all field events`)),
         catchError(this.handleError)
