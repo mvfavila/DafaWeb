@@ -26,8 +26,15 @@ export class FieldsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.fields = this.route.snapshot.data.fieldsData.fields || [];
+    this.fields = this.loadFieldsData();
     this.dataSource = new FieldsDataSource(this.paginator, this.sort, this.fields);
+  }
+
+  private loadFieldsData() {
+    if (!this.route.snapshot.data.fieldsData) {
+      return [];
+    }
+    return this.route.snapshot.data.fieldsData.fields || [];
   }
 
   public selectField(field: FieldItem) {
