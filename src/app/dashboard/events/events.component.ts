@@ -25,8 +25,15 @@ export class EventsComponent implements OnInit {
     private dataTransferService: DataTransferService) { }
 
   ngOnInit() {
-    this.events = this.route.snapshot.data.eventsData.events || [];
+    this.events = this.loadEventsData();
     this.dataSource = new EventsDataSource(this.paginator, this.sort, this.events);
+  }
+
+  private loadEventsData() {
+    if (!this.route.snapshot.data.eventsData) {
+      return [];
+    }
+    return this.route.snapshot.data.eventsData.events || [];
   }
 
   public selectEvent(event: EventItem) {
