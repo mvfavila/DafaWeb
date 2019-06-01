@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { environment } from "../environments/environment";
 import { Observable, throwError } from "rxjs";
 import {
   HttpClient,
@@ -9,9 +8,7 @@ import {
 import { catchError, tap, map } from "rxjs/operators";
 import { SessionService } from "./session.service";
 import { MessageService } from "./message.service";
-import { Token } from "./token";
 import {
-  UserRoutes,
   ClientRoutes,
   FieldRoutes,
   EventRoutes,
@@ -34,21 +31,6 @@ export class ApiService {
     private readonly session: SessionService,
     private readonly messageService: MessageService
   ) {}
-
-  public signIn(email: string, password: string): Observable<Token> {
-    const url = UserRoutes.signIn();
-    return this.http
-      .post<Token>(url, {
-        user: {
-          email: email,
-          password: password
-        }
-      })
-      .pipe(
-        tap(_ => this.log(`Logged in (email=${email})`)),
-        catchError(this.handleError)
-      );
-  }
 
   public getClients(): Observable<ClientItem[]> {
     const options = this.getRequestOptions();
