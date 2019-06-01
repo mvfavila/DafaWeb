@@ -6,5 +6,8 @@ module.exports = {
     "plugin:prettier/recommended"
   ],
   plugins: ["@typescript-eslint"],
-  rules: {}
+  rules: {
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-parameter-properties": "off"
+  }
 };
