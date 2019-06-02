@@ -1,23 +1,23 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ReactiveFormsModule } from "@angular/forms";
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import {
   MatButtonModule,
   MatCardModule,
   MatInputModule,
   MatRadioModule,
-  MatSelectModule,
-} from '@angular/material';
+  MatSelectModule
+} from "@angular/material";
 
-import { EventComponent } from './event.component';
+import { EventComponent } from "./event.component";
 
-describe('EventComponent', () => {
+describe("EventComponent", () => {
   let component: EventComponent;
   let fixture: ComponentFixture<EventComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EventComponent ],
+      declarations: [EventComponent],
       imports: [
         NoopAnimationsModule,
         ReactiveFormsModule,
@@ -25,7 +25,7 @@ describe('EventComponent', () => {
         MatCardModule,
         MatInputModule,
         MatRadioModule,
-        MatSelectModule,
+        MatSelectModule
       ]
     }).compileComponents();
   }));
@@ -36,7 +36,7 @@ describe('EventComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should compile', () => {
+  it("should compile", () => {
     expect(component).toBeTruthy();
   });
 });

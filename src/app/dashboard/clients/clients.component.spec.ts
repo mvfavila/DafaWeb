@@ -1,21 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatPaginatorModule, MatSortModule, MatTableModule } from '@angular/material';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
+import {
+  MatPaginatorModule,
+  MatSortModule,
+  MatTableModule
+} from "@angular/material";
 
-import { ClientsComponent } from './clients.component';
+import { ClientsComponent } from "./clients.component";
 
-describe('ClientsComponent', () => {
+describe("ClientsComponent", () => {
   let component: ClientsComponent;
   let fixture: ComponentFixture<ClientsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ClientsComponent ],
+      declarations: [ClientsComponent],
       imports: [
         NoopAnimationsModule,
         MatPaginatorModule,
         MatSortModule,
-        MatTableModule,
+        MatTableModule
       ]
     }).compileComponents();
   }));
@@ -26,7 +30,7 @@ describe('ClientsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should compile', () => {
+  it("should compile", () => {
     expect(component).toBeTruthy();
   });
 });

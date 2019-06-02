@@ -1,12 +1,12 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { ClientsCompService } from './clients-comp.service';
+import { ClientsCompResolver } from "./clients-comp.service";
 
-describe('ClientsCompService', () => {
+describe("ClientsCompService", () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
-  it('should be created', () => {
-    const service: ClientsCompService = TestBed.get(ClientsCompService);
+  it("should be created", () => {
+    const service: ClientsCompResolver = TestBed.get(ClientsCompResolver);
     expect(service).toBeTruthy();
   });
 });
