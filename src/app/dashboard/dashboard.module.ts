@@ -1,26 +1,38 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { LayoutComponent } from './layout/layout.component';
-import { AdminComponent } from './admin/admin.component';
-import { RouterModule } from '@angular/router';
-import { dashboardRoutes } from './dashboard.routes';
-import { AuthGuard } from '../guards/auth-guard.service';
-import { RoleGuard } from '../guards/role-guard.service';
-import { HomeComponent } from './home/home.component';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { LayoutComponent } from "./layout/layout.component";
+import { AdminComponent } from "./admin/admin.component";
+import { RouterModule } from "@angular/router";
+import { dashboardRoutes } from "./dashboard.routes";
+import { AuthGuard } from "../guards/auth-guard.service";
+import { RoleGuard } from "../guards/role-guard.service";
+import { HomeComponent } from "./home/home.component";
 import {
-  MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule,
-  MatTableModule, MatPaginatorModule, MatSortModule, MatInputModule, MatSelectModule,
-  MatRadioModule, MatSlideToggleModule, MatSnackBarModule, MatDatepickerModule, MatNativeDateModule
-} from '@angular/material';
-import { LayoutModule } from '@angular/cdk/layout';
-import { ClientsComponent } from './clients/clients.component';
-import { ClientComponent } from './client/client.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { DataTransferService } from './data-transfer.service';
-import { EventsComponent } from './events/events.component';
-import { EventComponent } from './event/event.component';
-import { FieldComponent } from './field/field.component';
-import { FieldsComponent } from './fields/fields.component';
+  MatGridListModule,
+  MatCardModule,
+  MatMenuModule,
+  MatIconModule,
+  MatButtonModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatInputModule,
+  MatSelectModule,
+  MatRadioModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatDatepickerModule,
+  MatNativeDateModule
+} from "@angular/material";
+import { LayoutModule } from "@angular/cdk/layout";
+import { ClientsComponent } from "./clients/clients.component";
+import { ClientComponent } from "./client/client.component";
+import { ReactiveFormsModule } from "@angular/forms";
+import { DataTransferService } from "./data-transfer.service";
+import { EventsComponent } from "./events/events.component";
+import { EventComponent } from "./event/event.component";
+import { FieldComponent } from "./field/field.component";
+import { FieldsComponent } from "./fields/fields.component";
 
 @NgModule({
   declarations: [
@@ -32,7 +44,7 @@ import { FieldsComponent } from './fields/fields.component';
     EventsComponent,
     EventComponent,
     FieldComponent,
-    FieldsComponent,
+    FieldsComponent
   ],
   imports: [
     CommonModule,
@@ -55,13 +67,7 @@ import { FieldsComponent } from './fields/fields.component';
     MatNativeDateModule,
     ReactiveFormsModule
   ],
-  providers: [
-    AuthGuard,
-    RoleGuard,
-    DataTransferService
-  ],
-  entryComponents: [
-    ClientComponent,
-  ]
+  providers: [AuthGuard, RoleGuard, DataTransferService],
+  entryComponents: [ClientComponent]
 })
-export class DashboardModule { }
+export class DashboardModule {}
