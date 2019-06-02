@@ -8,8 +8,7 @@ import {
 import { catchError, tap, map } from "rxjs/operators";
 import { SessionService } from "./session.service";
 import { MessageService } from "./message.service";
-import { EventRoutes, AlertTypeRoutes, EventWarningRoutes } from "./routes";
-import { EventItem } from "./models/event";
+import { EventTypeRoutes, AlertTypeRoutes, EventWarningRoutes } from "./routes";
 import { AlertTypeItem } from "./models/alertType";
 import { EventWarningItem } from "./models/eventWarning";
 import { EventTypeItem } from "./models/eventType";
@@ -24,38 +23,9 @@ export class ApiService {
     private readonly messageService: MessageService
   ) {}
 
-  public getEvents(): Observable<EventItem[]> {
-    const options = this.getRequestOptions();
-    return this.http.get<EventItem[]>(EventRoutes.default(), options).pipe(
-      tap(_ => this.log(`Fetched all events`)),
-      catchError(this.handleError)
-    );
-  }
-
-  public createEvent(event: EventItem): Observable<EventItem> {
-    const options = this.getRequestOptions();
-    return this.http
-      .post<EventItem>(
-        EventRoutes.default(),
-        {
-          event: {
-            date: event.date,
-            eventType: event.eventType,
-            field: event.field,
-            active: event.active
-          }
-        },
-        options
-      )
-      .pipe(
-        tap(_ => this.log(`Created event`)),
-        catchError(this.handleError)
-      );
-  }
-
   public getEventTypes(): Observable<EventTypeItem[]> {
     const options = this.getRequestOptions();
-    return this.http.get<any>(EventRoutes.default(), options).pipe(
+    return this.http.get<any>(EventTypeRoutes.default(), options).pipe(
       map(result => result.eventTypes),
       tap(_ => this.log(`Fetched all event types`)),
       catchError(this.handleError)
@@ -71,7 +41,7 @@ export class ApiService {
     );
   }
 
-  public updateEventStatus(
+  public updateEventWarningStatus(
     eventWarning: EventWarningItem
   ): Observable<EventWarningItem> {
     const options = this.getRequestOptions();

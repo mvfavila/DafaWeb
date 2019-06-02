@@ -22,12 +22,16 @@ export class EventRoutes {
   public static default = () => API_URL + "/events";
 }
 
-export class AlertTypeRoutes {
-  public static default = () => API_URL + "/alertTypes";
+export class EventTypeRoutes {
+  public static default = () => API_URL + "/eventTypes";
 }
 
 export class EventWarningRoutes {
   public static default = () => API_URL + "/eventWarnings";
   public static byId = (eventWarningId: any) =>
     `${EventWarningRoutes.default}/${eventWarningId}`;
+}
+
+export class AlertTypeRoutes {
+  public static default = () => API_URL + "/alertTypes";
 }
