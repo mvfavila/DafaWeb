@@ -1,19 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { ClientItem, Client } from 'src/app/models/client';
-import { DataTransferService } from '../data-transfer.service';
-import { Router } from '@angular/router';
-import { ApiService } from 'src/app/api.service';
-import { MatSnackBar } from '@angular/material';
-import { Field } from 'src/app/models/field';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
+import { ClientItem, Client } from "src/app/models/client";
+import { DataTransferService } from "../data-transfer.service";
+import { Router } from "@angular/router";
+import { ClientApiService } from "src/app/services/client.api.service";
+import { MatSnackBar } from "@angular/material";
+import { Field } from "src/app/models/field";
 
 @Component({
-  selector: 'app-client',
-  templateUrl: './client.component.html',
-  styleUrls: ['./client.component.scss']
+  selector: "app-client",
+  templateUrl: "./client.component.html",
+  styleUrls: ["./client.component.scss"]
 })
 export class ClientComponent implements OnInit {
-  clientForm = this.fb.group({
+  private clientForm = this.fb.group({
     company: [null, Validators.required],
     firstName: [null, Validators.required],
     lastName: [null, Validators.required],
@@ -21,10 +21,11 @@ export class ClientComponent implements OnInit {
     address: [null, Validators.required],
     city: [null, Validators.required],
     state: [null, Validators.required],
-    postalCode: [null, Validators.compose([
-      Validators.pattern('[0-9]{5}-[0-9]{3}')])
+    postalCode: [
+      null,
+      Validators.compose([Validators.pattern("[0-9]{5}-[0-9]{3}")])
     ],
-    active: false,
+    active: false
   });
 
   public hasUnitNumber = false;
@@ -33,26 +34,27 @@ export class ClientComponent implements OnInit {
   public isBusy = false;
   public data: any;
 
-  states = [
-    {name: 'Alagoas', abbreviation: 'AL'},
-    {name: 'Bahia', abbreviation: 'BA'},
-    {name: 'Ceará', abbreviation: 'CE'},
-    {name: 'Maranhão', abbreviation: 'MA'},
-    {name: 'Paraíba', abbreviation: 'PB'},
-    {name: 'Pernambuco', abbreviation: 'PE'},
-    {name: 'Piauí', abbreviation: 'PI'},
-    {name: 'Rio Grande do Norte', abbreviation: 'RN'},
-    {name: 'Sergipe', abbreviation: 'SE'},
+  private states = [
+    { name: "Alagoas", abbreviation: "AL" },
+    { name: "Bahia", abbreviation: "BA" },
+    { name: "Ceará", abbreviation: "CE" },
+    { name: "Maranhão", abbreviation: "MA" },
+    { name: "Paraíba", abbreviation: "PB" },
+    { name: "Pernambuco", abbreviation: "PE" },
+    { name: "Piauí", abbreviation: "PI" },
+    { name: "Rio Grande do Norte", abbreviation: "RN" },
+    { name: "Sergipe", abbreviation: "SE" }
   ];
 
-  constructor(private fb: FormBuilder,
+  public constructor(
+    private fb: FormBuilder,
     private dataTransferService: DataTransferService,
     private router: Router,
-    private api: ApiService,
+    private api: ClientApiService,
     public snackBar: MatSnackBar
   ) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     // Grab client from data transfer service
     this.data = this.dataTransferService.getData();
     if (this.data) {
@@ -63,13 +65,13 @@ export class ClientComponent implements OnInit {
     }
   }
 
-  openSnackBar(message: string) {
-    return this.snackBar.open(message, 'Close', {
+  public openSnackBar(message: string) {
+    return this.snackBar.open(message, "Close", {
       duration: 2000
     });
   }
 
-  onSubmit() {
+  public onSubmit() {
     // Make sure form values are valid
     if (this.clientForm.invalid) {
       this.showInputErrors = true;
@@ -89,15 +91,15 @@ export class ClientComponent implements OnInit {
     }
 
     // Grab values from form
-    client.firstName = this.clientForm.value['firstName'];
-    client.lastName = this.clientForm.value['lastName'];
-    client.company = this.clientForm.value['company'];
-    client.address = this.clientForm.value['address'];
-    client.city = this.clientForm.value['city'];
-    client.state = this.clientForm.value['state'];
-    client.postalCode = this.clientForm.value['postalCode'];
-    client.email = this.clientForm.value['email'];
-    client.active = this.clientForm.value['active'];
+    client.firstName = this.clientForm.value["firstName"];
+    client.lastName = this.clientForm.value["lastName"];
+    client.company = this.clientForm.value["company"];
+    client.address = this.clientForm.value["address"];
+    client.city = this.clientForm.value["city"];
+    client.state = this.clientForm.value["state"];
+    client.postalCode = this.clientForm.value["postalCode"];
+    client.email = this.clientForm.value["email"];
+    client.active = this.clientForm.value["active"];
 
     // Submit request to API
     if (newClient) {
@@ -118,54 +120,52 @@ export class ClientComponent implements OnInit {
     this.dataTransferService.setData(newField);
 
     // redirect to field component
-    this.router.navigate(['/dashboard/field']);
+    this.router.navigate(["/dashboard/field"]);
   }
 
   private createClient(client: ClientItem) {
-    this.api
-      .createClient(client)
-      .subscribe((clientItem: ClientItem) => {
+    this.api.createClient(client).subscribe(
+      (clientItem: ClientItem) => {
         this.isBusy = false;
         this.hasFailed = false;
 
-        const snackBarRef = this.openSnackBar('Client created');
+        const snackBarRef = this.openSnackBar("Client created");
         snackBarRef.afterDismissed().subscribe(() => {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(["/dashboard"]);
         });
       },
-      (error) => {
+      error => {
         this.isBusy = false;
         this.hasFailed = true;
-        this.openSnackBar('Fail');
+        this.openSnackBar("Fail");
       }
     );
   }
 
   private updateClient(client: ClientItem) {
-    this.api
-      .updateClient(client)
-      .subscribe((clientItem: ClientItem) => {
+    this.api.updateClient(client).subscribe(
+      (clientItem: ClientItem) => {
         this.isBusy = false;
         this.hasFailed = false;
 
-        const snackBarRef = this.openSnackBar('Client updated');
+        const snackBarRef = this.openSnackBar("Client updated");
         snackBarRef.afterDismissed().subscribe(() => {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(["/dashboard"]);
         });
       },
-      (error) => {
+      error => {
         this.isBusy = false;
         this.hasFailed = true;
-        this.openSnackBar('Fail');
+        this.openSnackBar("Fail");
       }
     );
   }
 
-  onChange(e: { checked: boolean; }) {
-      if (e.checked === true) {
-        this.clientForm.controls['active'].setValue(true);
-      } else {
-        this.clientForm.controls['active'].setValue(false);
-      }
+  public onChange(e: { checked: boolean }) {
+    if (e.checked === true) {
+      this.clientForm.controls["active"].setValue(true);
+    } else {
+      this.clientForm.controls["active"].setValue(false);
+    }
   }
 }

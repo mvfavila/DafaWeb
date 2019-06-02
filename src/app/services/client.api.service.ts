@@ -10,6 +10,7 @@ import { SessionService } from "../session.service";
 import { MessageService } from "../message.service";
 import { ClientRoutes } from "../routes";
 import { ClientItem } from "../models/client";
+import { FieldItem } from "../models/field";
 @Injectable({
   providedIn: "root"
 })
@@ -77,6 +78,16 @@ export class ClientApiService {
       )
       .pipe(
         tap(_ => this.log(`Updated client`)),
+        catchError(this.handleError)
+      );
+  }
+
+  public getFieldsByClient(clientId: string): Observable<FieldItem[]> {
+    const options = this.getRequestOptions();
+    return this.http
+      .get<FieldItem[]>(ClientRoutes.fieldsByClient(clientId), options)
+      .pipe(
+        tap(_ => this.log(`Fetched all client's fields`)),
         catchError(this.handleError)
       );
   }
