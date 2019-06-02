@@ -5,31 +5,21 @@ import {
   HttpErrorResponse,
   HttpHeaders
 } from "@angular/common/http";
-import { catchError, tap, map } from "rxjs/operators";
-import { SessionService } from "./session.service";
-import { MessageService } from "./message.service";
-import { AlertTypeRoutes, EventWarningRoutes } from "./routes";
-import { AlertTypeItem } from "./models/alertType";
-import { EventWarningItem } from "./models/eventWarning";
+import { catchError, tap } from "rxjs/operators";
+import { SessionService } from "../session.service";
+import { MessageService } from "../message.service";
+import { EventWarningRoutes } from "../routes";
+import { EventWarningItem } from "../models/eventWarning";
 
 @Injectable({
   providedIn: "root"
 })
-export class ApiService {
+export class EventWarningApiService {
   private constructor(
     private readonly http: HttpClient,
     private readonly session: SessionService,
     private readonly messageService: MessageService
   ) {}
-
-  public getAlertTypes(): Observable<AlertTypeItem[]> {
-    const options = this.getRequestOptions();
-    return this.http.get<any>(AlertTypeRoutes.default(), options).pipe(
-      map(result => result.alertTypes),
-      tap(_ => this.log(`Fetched all alert types`)),
-      catchError(this.handleError)
-    );
-  }
 
   public updateEventWarningStatus(
     eventWarning: EventWarningItem
