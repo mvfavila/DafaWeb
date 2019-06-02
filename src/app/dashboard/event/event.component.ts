@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { DataTransferService } from '../data-transfer.service';
-import { Router } from '@angular/router';
-import { ApiService } from 'src/app/api.service';
-import { MatSnackBar, MatDatepickerModule } from '@angular/material';
-import { EventItem } from 'src/app/models/event';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
+import { DataTransferService } from "../data-transfer.service";
+import { Router } from "@angular/router";
+import { EventApiService } from "../../services/event.api.service";
+import { EventTypeApiService } from "../../services/eventtype.api.service";
+import { MatSnackBar, MatDatepickerModule } from "@angular/material";
+import { EventItem } from "src/app/models/event";
 
 @Component({
-  selector: 'app-event',
-  templateUrl: './event.component.html',
-  styleUrls: ['./event.component.scss']
+  selector: "app-event",
+  templateUrl: "./event.component.html",
+  styleUrls: ["./event.component.scss"]
 })
 export class EventComponent implements OnInit {
-  eventForm = this.fb.group({
+  private eventForm = this.fb.group({
     date: [null, Validators.required],
     eventType: [null, Validators.required],
     field: [null, Validators.required]
@@ -24,19 +25,21 @@ export class EventComponent implements OnInit {
   public isBusy = false;
   public data: any;
 
-  eventTypes = [];
+  protected eventTypes = [];
 
-  constructor(private fb: FormBuilder,
+  public constructor(
+    private fb: FormBuilder,
     private dataTransferService: DataTransferService,
     private router: Router,
-    private api: ApiService,
+    private apiEvent: EventApiService,
+    private apiEventType: EventTypeApiService,
     public snackBar: MatSnackBar,
     public picker: MatDatepickerModule
   ) {
     this.loadEventTypes();
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     // Grab client from data transfer service
     this.data = this.dataTransferService.getData();
     if (this.data) {
@@ -48,24 +51,25 @@ export class EventComponent implements OnInit {
   }
 
   private async loadEventTypes() {
-    await this.api.getEventTypes()
-    .subscribe((result) => {
-      this.eventTypes = result;
-    },
-    (error) => {
-      this.isBusy = false;
-      this.hasFailed = true;
-      this.openSnackBar('Fail');
-    });
+    await this.apiEventType.getEventTypes().subscribe(
+      result => {
+        this.eventTypes = result;
+      },
+      error => {
+        this.isBusy = false;
+        this.hasFailed = true;
+        this.openSnackBar("Fail");
+      }
+    );
   }
 
-  openSnackBar(message: string) {
-    return this.snackBar.open(message, 'Close', {
+  public openSnackBar(message: string) {
+    return this.snackBar.open(message, "Close", {
       duration: 2000
     });
   }
 
-  onSubmit() {
+  public onSubmit() {
     // Make sure form values are valid
     if (this.eventForm.invalid) {
       this.showInputErrors = true;
@@ -80,25 +84,24 @@ export class EventComponent implements OnInit {
     const event = this.dataTransferService.getData();
 
     // Grab values from form
-    event.date = this.eventForm.value['date'];
-    event.eventType = this.eventForm.value['eventType'];
+    event.date = this.eventForm.value["date"];
+    event.eventType = this.eventForm.value["eventType"];
 
     // Submit request to API
-    this.api
-      .createEvent(event)
-      .subscribe((eventItem: EventItem) => {
+    this.apiEvent.createEvent(event).subscribe(
+      (eventItem: EventItem) => {
         this.isBusy = false;
         this.hasFailed = false;
 
-        const snackBarRef = this.openSnackBar('Success');
+        const snackBarRef = this.openSnackBar("Success");
         snackBarRef.afterDismissed().subscribe(() => {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(["/dashboard"]);
         });
       },
-      (error) => {
+      error => {
         this.isBusy = false;
         this.hasFailed = true;
-        this.openSnackBar('Fail');
+        this.openSnackBar("Fail");
       }
     );
   }

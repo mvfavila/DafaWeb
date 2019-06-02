@@ -8,10 +8,9 @@ import {
 import { catchError, tap, map } from "rxjs/operators";
 import { SessionService } from "./session.service";
 import { MessageService } from "./message.service";
-import { EventTypeRoutes, AlertTypeRoutes, EventWarningRoutes } from "./routes";
+import { AlertTypeRoutes, EventWarningRoutes } from "./routes";
 import { AlertTypeItem } from "./models/alertType";
 import { EventWarningItem } from "./models/eventWarning";
-import { EventTypeItem } from "./models/eventType";
 
 @Injectable({
   providedIn: "root"
@@ -22,15 +21,6 @@ export class ApiService {
     private readonly session: SessionService,
     private readonly messageService: MessageService
   ) {}
-
-  public getEventTypes(): Observable<EventTypeItem[]> {
-    const options = this.getRequestOptions();
-    return this.http.get<any>(EventTypeRoutes.default(), options).pipe(
-      map(result => result.eventTypes),
-      tap(_ => this.log(`Fetched all event types`)),
-      catchError(this.handleError)
-    );
-  }
 
   public getAlertTypes(): Observable<AlertTypeItem[]> {
     const options = this.getRequestOptions();
