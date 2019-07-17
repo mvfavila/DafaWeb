@@ -27,6 +27,7 @@ import { DashboardModule } from "./dashboard/dashboard.module";
 import { ClientsCompResolver } from "./resolvers/clients-comp.service";
 import { EventsCompResolver } from "./resolvers/events-comp.service";
 import { FieldsCompResolver } from "./resolvers/fields-comp.service";
+import { SignInComponent } from "./signin/signin.component";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { FieldsCompResolver } from "./resolvers/fields-comp.service";
     MainNavComponent,
     LoginComponent,
     MessagesComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,

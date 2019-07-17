@@ -42,3 +42,6 @@ testem.log
 .DS_Store
 Thumbs.db
 .editorconfig
+
+# Environment files
+/src/environments/environment.prod.ts

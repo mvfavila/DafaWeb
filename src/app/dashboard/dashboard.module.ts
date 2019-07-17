@@ -4,7 +4,7 @@ import { LayoutComponent } from "./layout/layout.component";
 import { AdminComponent } from "./admin/admin.component";
 import { RouterModule } from "@angular/router";
 import { dashboardRoutes } from "./dashboard.routes";
-import { AuthGuard } from "../guards/auth-guard.service";
+import { AuthGuardService } from "../guards/auth-guard.service";
 import { RoleGuard } from "../guards/role-guard.service";
 import { HomeComponent } from "./home/home.component";
 import {
@@ -67,7 +67,7 @@ import { FieldsComponent } from "./fields/fields.component";
     MatNativeDateModule,
     ReactiveFormsModule
   ],
-  providers: [AuthGuard, RoleGuard, DataTransferService],
+  providers: [AuthGuardService, RoleGuard, DataTransferService],
   entryComponents: [ClientComponent]
 })
 export class DashboardModule {}
